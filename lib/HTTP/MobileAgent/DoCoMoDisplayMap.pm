@@ -597,6 +597,42 @@ $DisplayMap ||= {
     'depth' => 65536,
     'color' => 1
   },
+  'D506i' => {
+    'width' => 240,
+    'height' => 270,
+    'depth' => 262144,
+    'color' => 1
+  },
+  'F506i' => {    
+    'width' => 240,    
+    'height' => 268,    
+    'depth' => 262144,
+    'color' => 1
+  },
+  'F900I' => {
+    'width' => 230,
+    'height' => 240,
+    'depth' => 262144,
+    'color' => 1
+  },
+  'N900I' => {    
+    'width' => 240,    
+    'height' => 269,    
+    'depth' => 65536,
+    'color' => 1
+  },
+  'P900I' => {
+    'width' => 240,
+    'height' => 266,
+    'depth' => 65536,
+    'color' => 1
+  },
+  'SH900I' => {
+    'width' => 240,    
+    'height' => 252,    
+    'depth' => 262144,
+    'color' => 1
+  },
 };
 
 

@@ -2,7 +2,7 @@ package HTTP::MobileAgent::DoCoMo;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.18;
+$VERSION = 0.19;
 
 use base qw(HTTP::MobileAgent);
 
@@ -31,6 +31,10 @@ $HTMLVerMap = [
 $GPSModels = { map { $_ => 1 } qw(F661i) };
 
 sub is_docomo { 1 }
+
+sub carrier { 'I' }
+
+sub carrier_longname { 'DoCoMo' }
 
 sub parse {
     my $self = shift;
@@ -108,9 +112,12 @@ sub cache_size {
 
 sub series {
     my $self = shift;
-    return 'FOMA' if $self->is_foma;
-
     my $model = $self->model;
+
+    if ($self->is_foma && $model =~ /\d{4}/) {
+        return 'FOMA';
+    }
+
     $model =~ /(\d{3}i)/;
     return $1;
 }
@@ -173,7 +180,7 @@ HTTP::MobileAgent::DoCoMo - NTT DoCoMo implementation
   printf "Comment: %s\n", $agent->comment;		# "Google CHTML Proxy/1.0
 
   # e.g.) "DoCoMo/1.0/D505i/c20/TB/W20H10"
-  printf "
+  printf "Status: %s\n", $agent->status;                # "TB"
 
   # only available in eggy/M-stage
   # e.g.) "DoCoMo/1.0/eggy/c300/s32/kPHS-K"
@@ -261,6 +268,17 @@ undef otherwise.
 
 returns bandwidth like 32 as killobytes unit. Only vailable in eggy,
 returns undef otherwise.
+
+=item status
+
+  $status = $agent->status;
+
+returns status like "TB", "TC", "TD" or "TJ", which means:
+
+  TB | Browsers
+  TC | Browsers with image off (only Available in HTML 5.0)
+  TD | Fetching JAR
+  TJ | i-Appli
 
 =back
 

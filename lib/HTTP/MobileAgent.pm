@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.20;
+$VERSION = 0.21;
 
 use HTTP::MobileAgent::Request;
 
@@ -81,9 +81,11 @@ sub no_match {
 
 sub is_docomo  { 0 }
 sub is_j_phone { 0 }
+sub is_vodafone { 0 }
 sub is_ezweb   { 0 }
 sub is_airh_phone { 0 }
 sub is_non_mobile { 0 }
+sub is_tuka { 0 }
 
 sub is_wap1 {
     my $self = shift;
@@ -95,6 +97,8 @@ sub is_wap2 {
     $self->is_ezweb && $self->xhtml_compliant;
 }
 
+sub carrier { undef }
+sub carrier_longname { undef }
 
 1;
 __END__
@@ -116,9 +120,9 @@ HTTP::MobileAgent - HTTP mobile user agent string parser
       # or if ($agent->isa('HTTP::MobileAgent::DoCoMo'))
       # it's NTT DoCoMo i-mode.
       # see what's available in H::MA::DoCoMo
-  } elsif ($agent->is_j_phone) {
-      # it's J-Phone.
-      # see what's available in H::MA::JPhone
+  } elsif ($agent->is_vodafone) {
+      # it's Vodafone(J-Phone).
+      # see what's available in H::MA::Vodafone
   } elsif ($agent->is_ezweb) {
       # it's KDDI/EZWeb.
       # see what's available in H::MA::EZweb
@@ -168,11 +172,19 @@ returns User-Agent string.
 
 returns User-Agent name like 'DoCoMo'.
 
-=item is_docomo, is_j_phone, is_ezweb, is_wap1, is_wap2, is_non_mobile
+=item is_docomo, is_vodafone(is_j_phone), is_ezweb, is_wap1, is_wap2, is_tuka,is_non_mobile
 
    if ($agent->is_docomo) { }
 
-returns if the agent is DoCoMo, J-Phone or EZweb.
+returns if the agent is DoCoMo, Vodafone(J-Phone) or EZweb.
+
+=item carrier
+
+  print "carrier: ", $agent->carrier;    
+
+=item carrier_longname
+
+  print "carrier_longname: ", $agent->carrier_longname;    
 
 =item display
 
@@ -227,9 +239,11 @@ Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
+=head1 MAIN
+
 =head1 SEE ALSO
 
-L<HTTP::MobileAgent::DoCoMo>, L<HTTP::MobileAgent::JPhone>,
+L<HTTP::MobileAgent::DoCoMo>, L<HTTP::MobileAgent::Vodafone>, L<HTTP::MobileAgent::JPhone>,
 L<HTTP::MobileAgent::EZweb>, L<HTTP::MobileAgent::NonMobile>,
 L<HTTP::MobileAgent::Display>, L<HTTP::BrowserDetect>
 

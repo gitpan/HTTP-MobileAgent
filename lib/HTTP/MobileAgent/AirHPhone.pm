@@ -2,7 +2,7 @@ package HTTP::MobileAgent::AirHPhone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.17;
+$VERSION = 0.18;
 
 use base qw(HTTP::MobileAgent);
 
@@ -11,6 +11,10 @@ __PACKAGE__->make_accessors(
 );
 
 sub is_airh_phone { 1 }
+
+sub carrier { 'H' }
+
+sub carrier_longname { 'AirH' }
 
 sub name { 'DDIPOCKET' }
 

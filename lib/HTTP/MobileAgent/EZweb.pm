@@ -2,15 +2,29 @@ package HTTP::MobileAgent::EZweb;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.17;
+$VERSION = 0.18;
 
 use base qw(HTTP::MobileAgent);
 
 __PACKAGE__->make_accessors(
-    qw(version device_id server xhtml_compliant comment)
+    qw(version model device_id server xhtml_compliant comment)
 );
 
 sub is_ezweb { 1 }
+
+sub carrier { 'E' }
+
+sub carrier_longname { 'EZweb' }
+
+sub is_tuka {
+  my $self = shift;
+  my $tuka = substr($self->device_id, 2, 1);
+  if($self->is_wap2){
+      return 1 if $tuka eq 'U';
+  } else {
+      return 1 if $tuka eq 'T';
+  }
+}
 
 sub parse {
     my $self = shift;
@@ -20,6 +34,7 @@ sub parse {
 	$self->{xhtml_compliant} = 1;
 	my($device, $browser, $opt, $server) = split / /, $ua, 4;
 	$self->{device_id} = $device;
+	$self->{model} = $device;
 
 	my($name, $version) = split m!/!, $browser;
 	$self->{name} = $name;

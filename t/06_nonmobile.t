@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 825;
+use Test::More tests => 1476;
 use HTTP::MobileAgent;
 
 while (<DATA>) {
@@ -11,6 +11,10 @@ while (<DATA>) {
     ok ! $agent->is_j_phone;
     ok ! $agent->is_ezweb;
     ok $agent->is_non_mobile;
+    ok $agent->model eq '';
+    ok $agent->device_id eq '';
+    ok $agent->carrier eq 'N';
+    ok $agent->carrier_longname eq 'NonMobile';
 }
 
 __END__
@@ -147,8 +151,7 @@ Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90; Q312461)
 Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90; Q312461; T312461)
 Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90; T312461)
 Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90; T312461; .NET CLR 1.0.3705)
-Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90; T312461; Lunascape 0
-.99c)
+Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90; T312461; Lunascape 0.99c)
 Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90; Unithink)
 Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90; telus.net_v5.0.1; Hotbar 4.0)
 Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; telus.net_v5.0.1)

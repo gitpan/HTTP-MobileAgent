@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 224;
+use Test::More tests => 246;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -19,6 +19,7 @@ my @Tests = (
 	  Configuration => 'CLDC-1.0',
 	  'Ext-Profile' => 'JSCL-1.1.0',
       }],
+    [ 'J-PHONE/5.0/V801SA', '5.0', 'V801SA', undef ],
 );
 
 for (@Tests) {
@@ -26,7 +27,7 @@ for (@Tests) {
     my $agent = HTTP::MobileAgent->new($ua);
     isa_ok $agent, 'HTTP::MobileAgent';
     isa_ok $agent, 'HTTP::MobileAgent::JPhone';
-    ok !$agent->is_docomo && $agent->is_j_phone && !$agent->is_ezweb;
+    ok !$agent->is_docomo && $agent->is_j_phone && $agent->is_vodafone && !$agent->is_ezweb;
     is $agent->name, 'J-PHONE';
     is $agent->user_agent, $ua,		"ua is $ua";
 
@@ -39,6 +40,21 @@ for (@Tests) {
 	is $agent->vendor_version, $data[5],	"vendor version is $data[5]";
 	is_deeply $agent->java_info, $data[6];
     }
+
+    if($ua eq 'J-PHONE/2.0/J-DN02'){
+	    ok $agent->is_type_c && ! $agent->is_type_p && ! $agent->is_type_w;
+    }
+    if($ua eq 'J-PHONE/3.0/J-PE03_a'){
+	    ok $agent->is_type_c && ! $agent->is_type_p && ! $agent->is_type_w;
+    }
+    if($ua eq 'J-PHONE/4.0/J-SH51/SNJSHA3029293 SH/0001aa Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0') {
+	    ok !$agent->is_type_c && $agent->is_type_p && !$agent->is_type_w;
+    }
+    if($ua eq 'J-PHONE/5.0/V801SA'){
+	    ok !$agent->is_type_c && !$agent->is_type_p && $agent->is_type_w;
+    }
+    is $agent->carrier, 'V' , "carrier is V";
+    is $agent->carrier_longname, 'Vodafone' ,  "carrier longname is Vodafone";
 }
 
 while (<DATA>) {

@@ -1,16 +1,29 @@
 package HTTP::MobileAgent::NonMobile;
 
 use strict;
+use vars qw($VERSION);
+$VERSION = 0.02;
 use base qw(HTTP::MobileAgent);
+
+__PACKAGE__->make_accessors(
+    qw(model device_id)
+);
 
 sub parse {
     my $self = shift;
     my($name, $version) = split m!/!, $self->user_agent;
     $self->{name} = $name;
     $self->{version} = $version;
+    $self->{device_id} = '';
+	$self->{model} = '';
 }
 
 sub is_non_mobile { 1 }
+
+sub carrier { 'N' }
+
+sub carrier_longname { 'NonMobile' }
+
 
 1;
 __END__

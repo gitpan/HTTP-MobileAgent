@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 460;
+use Test::More tests => 487;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -11,6 +11,10 @@ my @Tests = (
       '6.0.2.276 (GUI)', 'TS21', 'MMP/1.1', 1, undef, undef, 1 ],
     [ 'UP.Browser/3.04-TS14 UP.Link/3.4.4 (Google WAP Proxy/1.0)',
       '3.04', 'TS14', 'UP.Link/3.4.4', undef, 'Google WAP Proxy/1.0', 1, undef ],
+    [ 'UP.Browser/3.04-TST4 UP.Link/3.4.5.6',
+      '3.04', 'TST4', 'UP.Link/3.4.5.6', undef, undef, 1, undef ],
+    [ 'KDDI-KCU1 UP.Browser/6.2.0.5.1 (GUI) MMP/2.0',
+      '6.2.0.5.1 (GUI)', 'KCU1', 'MMP/2.0', 1, undef, undef, 1 ],
 );
 
 for (@Tests) {
@@ -19,7 +23,7 @@ for (@Tests) {
     isa_ok $agent, 'HTTP::MobileAgent';
     isa_ok $agent, 'HTTP::MobileAgent::EZweb';
     is $agent->name, 'UP.Browser';
-    ok !$agent->is_docomo && !$agent->is_j_phone && $agent->is_ezweb;
+    ok !$agent->is_docomo && !$agent->is_j_phone && !$agent->is_vodafone && $agent->is_ezweb;
     is $agent->user_agent, $ua,		"ua is $ua";
 
     is $agent->version, $data[0];
@@ -29,6 +33,13 @@ for (@Tests) {
     is $agent->comment, $data[4];
     ok $agent->is_wap1 if $data[5];
     ok $agent->is_wap2 if $data[6];
+
+    if ($ua eq 'UP.Browser/3.04-TST4 UP.Link/3.4.5.6' 
+    	or $ua eq 'KDDI-KCU1 UP.Browser/6.2.0.5.1 (GUI) MMP/2.0'){
+    	ok $agent->is_tuka;
+	} else {
+		ok !$agent->is_tuka;
+	}
 }
 
 while (<DATA>) {
@@ -38,7 +49,7 @@ while (<DATA>) {
     my $agent = HTTP::MobileAgent->new;
     isa_ok $agent, 'HTTP::MobileAgent', "$_";
     is $agent->name, 'UP.Browser';
-    ok !$agent->is_docomo && !$agent->is_j_phone && $agent->is_ezweb;
+    ok !$agent->is_docomo && !$agent->is_j_phone && !$agent->is_vodafone && $agent->is_ezweb;
 }
 
 __END__

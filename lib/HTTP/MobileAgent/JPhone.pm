@@ -2,58 +2,9 @@ package HTTP::MobileAgent::JPhone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.17;
+$VERSION = 0.18;
 
-use base qw(HTTP::MobileAgent);
-
-__PACKAGE__->make_accessors(
-    qw(name version model packet_compliant
-       serial_number vendor vendor_version java_info)
-);
-
-sub is_j_phone { 1 }
-
-sub parse {
-    my $self = shift;
-    my($main, @rest) = split / /, $self->user_agent;
-
-    if (@rest) {
-	# J-PHONE/4.0/J-SH51/SNJSHA3029293 SH/0001aa Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0
-	$self->{packet_compliant} = 1;
-	@{$self}{qw(name version model serial_number)} = split m!/!, $main;
-	if ($self->{serial_number}) {
-	    $self->{serial_number} =~ s/^SN// or return $self->no_match;
-	}
-
-	my $vendor = shift @rest;
-	@{$self}{qw(vendor vendor_version)} = split m!/!, $vendor;
-
-	my %java_info = map split(m!/!), @rest;
-	$self->{java_info} = \%java_info;
-    }
-    else {
-	# J-PHONE/2.0/J-DN02
-	@{$self}{qw(name version model)} = split m!/!, $main;
-	$self->{vendor} = ($self->{model} =~ /J-([A-Z]+)/)[0] if $self->{model};
-    }
-}
-
-sub _make_display {
-    my $self = shift;
-    my($width, $height) = split /\*/, $self->get_header('x-jphone-display');
-
-    my($color, $depth);
-    if (my $c_str = $self->get_header('x-jphone-color')) {
-	($color, $depth) = $c_str =~ /^([CG])(\d+)$/;
-    }
-
-    return HTTP::MobileAgent::Display->new(
-	width  => $width,
-	height => $height,
-	color  => $color eq 'C',
-	depth  => $depth,
-    );
-}
+use base qw(HTTP::MobileAgent::Vodafone);
 
 1;
 __END__
@@ -85,91 +36,16 @@ HTTP::MobileAgent::JPhone - J-Phone implementation
 
 =head1 DESCRIPTION
 
-HTTP::MobileAgent::JPhone is a subclass of HTTP::MobileAgent, which
-implements J-PHONE user agents.
+HTTP::MobileAgent::JPhone is a subclass of HTTP::MobileAgent::Vodafone.
 
 =head1 METHODS
 
-See L<HTTP::MobileAgent/"METHODS"> for common methods. Here are
-HTTP::MobileAgent::JPhone specific methods.
+See L<HTTP::MobileAgent::Vodafone/"METHODS"> for methods.
 
-=over 4
-
-=item version
-
-  $version = $agent->version;
-
-returns J-PHONE version number like '1.0'.
-
-=item model
-
-  $model = $agent->model;
-
-returns name of the model like 'J-DN02'.
-
-=item packet_compliant
-
-  if ($agent->packet_compliant) { }
-
-returns whether the agent is packet connection complicant or not.
-
-=item serial_number
-
-  $serial_number = $agent->serial_number;
-
-return terminal unique serial number. returns undef if user forbids to
-send his/her serial number.
-
-=item vendor
-
-  $vendor = $agent->vendor;
-
-returns vendor code like 'SH'.
-
-=item vendor_version
-
-  $vendor_version = $agent->vendor_version;
-
-returns vendor version like '0001a'.  returns undef if unknown,
-
-=item java_info
-
-  $info = $agent->java_info;
-
-returns hash reference of Java profiles. Hash structure is something like:
-
-  'Profile'       => 'MIDP-1.0',
-  'Configuration' => 'CLDC-1.0',
-  'Ext-Profile'   => 'JSCL-1.1.0',
-
-returns undef if unknown.
-
-=back
-
-=head1 TODO
-
-=over 4
-
-=item *
-
-Area information support on http://www.dp.j-phone.com/jsky/position.html
-
-=back
-
-=head1 AUTHOR
-
-Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<HTTP::MobileAgent>
-
-http://www.dp.j-phone.com/jsky/user.html
-
-http://www.dp.j-phone.com/jsky/position.html
+L<HTTP::MobileAgent::Vodafone>
 
 
 =cut

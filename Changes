@@ -1,5 +1,17 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.21 Tue Jun  1 01:53:41 JST 2004
+    - Added documentation for status() method in DoCoMo.
+    - Added D506i,F506i,F900i,N900i,P900i,SH900i
+    * Added is_vodafone utility method
+    * Added is_tuka utility method
+    * Added carrier,carrier_longname utility method
+    * Added is_type_c,is_type_p,is_type_w method in Vodafone
+    * Added MobileAgent::Vodafone.pm
+      MobileAgent::JPhone.pm is sub class of MobileAgent::Vodafone.pm
+    - model returns device_id in EZweb
+    - model and device_id return '' in NonMobile
+
 0.20  Sun Oct 26 07:34:53 JST 2003
         * if the environment variable DOCOMO_MAP exists,
           the specified XML data will be used
@@ -9,65 +21,65 @@ Revision history for Perl extension HTTP::MobileAgent
         - Added D252i, SH252i, P252i, D505iS, N505iS, P505iS
 
 0.18  Mon Sep  1 23:43:08 JST 2003
-	- Added SH505i2 (huh?), N2102V
+    - Added SH505i2 (huh?), N2102V
 
 0.17  Wed Aug  6 21:12:01 JST 2003
-	- Added P505i, N2102V (auto-generated)	
+    - Added P505i, N2102V (auto-generated)    
 
 0.16  Wed Jul  9 16:33:27 JST 2003
-	- Added F505i & F2102V (auto-generated) 
+    - Added F505i & F2102V (auto-generated) 
 
 0.15  Wed Jul  9 01:31:17 JST 2003
-	- Added TB (status) support for FOMA
+    - Added TB (status) support for FOMA
 
 0.14  Tue Jul  1 21:25:25 JST 2003
-	- Added N505i (auto-generated)
+    - Added N505i (auto-generated)
 
 0.13  Mon Jun 30 00:36:38 JST 2003
-	- make DoCoMoDisplayMap case-insensitive
-	  to fix P209is gotcha
-	  (Thanks to Satoshi Tanimoto)
+    - make DoCoMoDisplayMap case-insensitive
+      to fix P209is gotcha
+      (Thanks to Satoshi Tanimoto)
 
 0.12  Wed, 18 Jun 2003 22:23:54 +0900
-	- Added N2701, SO505i and SH505i (auto-generated)
-	- Added i-mode HTML4.0 FOMA
+    - Added N2701, SO505i and SH505i (auto-generated)
+    - Added i-mode HTML4.0 FOMA
 
 0.11  Wed May 21 20:54:34 JST 2003
-	* Added is_gps() method in DoCoMo
-	- Reference for PHP port in POD
-	- Added D505i (auto-generated)
+    * Added is_gps() method in DoCoMo
+    - Reference for PHP port in POD
+    - Added D505i (auto-generated)
 
 0.10  Tue May  6 18:10:43 JST 2003
-	* Added DoCoMo 505i & i-mode HTML 5.0 support
-	- Added F661i (HTML 4.0)
+    * Added DoCoMo 505i & i-mode HTML 5.0 support
+    - Added F661i (HTML 4.0)
 
 0.09  Wed Apr  2 19:16:20 JST 2003
-	* Added Air H" Phone support (AirHPhone.pm)
-	- Added P2102V, N211iS, P211iS (auto-generated)
-	- Added FOMA HTML 4.0 support in html_version 
+    * Added Air H" Phone support (AirHPhone.pm)
+    - Added P2102V, N211iS, P211iS (auto-generated)
+    - Added FOMA HTML 4.0 support in html_version 
 
 0.08  Thu Feb 20 18:28:44 JST 2003
-	- Added is_non_mobile() method
+    - Added is_non_mobile() method
 
 0.07  Mon Jan 27 12:04:33 JST 2003
-	- Added N504iS, D251iS, P251iS, F2051, N2051, F504iS (auto-generated)
+    - Added N504iS, D251iS, P251iS, F2051, N2051, F504iS (auto-generated)
 
 0.06  Wed Dec  4 19:49:16 JST 2002
-	* Added is_wap1, is_wap2 utility method
+    * Added is_wap1, is_wap2 utility method
 
 0.05  Mon Nov 18 19:39:40 JST 2002
-	* Fixed bug in pattern match value check (caused bug in mod_perl environment)
+    * Fixed bug in pattern match value check (caused bug in mod_perl environment)
 
 0.04  Thu Nov 14 00:47:47 JST 2002
-	* Restored is_docomo, is_j_phone, is_ezweb API for handiness
-	- Added F212i, SO212i, P504iS, SH251iS in DoCoMoDisplayMap (auto-generated)
+    * Restored is_docomo, is_j_phone, is_ezweb API for handiness
+    - Added F212i, SO212i, P504iS, SH251iS in DoCoMoDisplayMap (auto-generated)
 
 0.03  Tue Oct 29 23:53:01 JST 2002
-	* Added HTTP::MobileAgent::Display to support various display information
+    * Added HTTP::MobileAgent::Display to support various display information
 
 0.02  Mon Sep 23 09:00:40 JST 2002
-	* Removed is_* API. Use $agent->name for dispatch
-	- warn_no_match() doesn't bless to NonMobile 
+    * Removed is_* API. Use $agent->name for dispatch
+    - warn_no_match() doesn't bless to NonMobile 
 
 0.01  Fri Sep 20 23:01:05 2002
-	- original version
+    - original version

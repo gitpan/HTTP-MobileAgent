@@ -15,7 +15,7 @@ sub do_task {
     $html =~ s/\n+/\n/g;
     my $re = regexp();
     my %map;
-    while ($html =~ /$re/gs) {
+    while ($html =~ /$re/igs) {
 	my($model, $width, $height, $color, $depth) = ($1, $2, $3, $4, $5);
 	$map{uc($model)} = {
 	    width => $width,
@@ -76,7 +76,7 @@ sub regexp {
 <TD><FONT SIZE="2">.*?</FONT></TD>
 <TD><FONT SIZE="2">(.*?)×(.*?)</FONT></TD>
 <TD><FONT SIZE="2">.*?</FONT></TD>
-<TD><FONT SIZE="2">(白黒|カラー)(\d+)(?:色|階調)</FONT></TD>
+<TD><FONT SIZE="2">(白黒|カラー)(?:.*?)(\d+)(?:色|階調)</FONT></TD>
 RE
     ;
 }
