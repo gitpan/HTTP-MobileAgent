@@ -1,5 +1,8 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.22 Fri Jun 11 14:42:55 JST 2004
+    * Fixed bug model returns '' in EZweb
+
 0.21 Tue Jun  1 01:53:41 JST 2004
     - Added documentation for status() method in DoCoMo.
     - Added D506i,F506i,F900i,N900i,P900i,SH900i

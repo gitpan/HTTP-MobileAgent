@@ -2,7 +2,7 @@ package HTTP::MobileAgent::EZweb;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.18;
+$VERSION = 0.19;
 
 use base qw(HTTP::MobileAgent);
 
@@ -34,7 +34,6 @@ sub parse {
 	$self->{xhtml_compliant} = 1;
 	my($device, $browser, $opt, $server) = split / /, $ua, 4;
 	$self->{device_id} = $device;
-	$self->{model} = $device;
 
 	my($name, $version) = split m!/!, $browser;
 	$self->{name} = $name;
@@ -53,6 +52,7 @@ sub parse {
 	    $self->{comment} = $comment;
 	}
     }
+    $self->{model} = $self->{device_id};
 }
 
 sub _make_display {
