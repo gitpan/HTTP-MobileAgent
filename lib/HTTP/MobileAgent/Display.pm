@@ -78,6 +78,14 @@ returns true if it has color capability.
 
 returns color depth of the display.
 
+=head1 USING EXTERNAL MAP FILE
+
+If the environment variable DOCOMO_MAP exists, the specified XML data will be used for $DisplayMap.
+
+ex) Please add the following code.
+
+  $ENV{DOCOMO_MAP} = '/path/to/DoCoMoMap.xml';
+
 =back
 
 =head1 AUTHOR
@@ -89,6 +97,6 @@ it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<HTTP::MobileAgent>
+L<HTTP::MobileAgent>, L<t/DoCoMoMap.xml>
 
 =cut

@@ -1,5 +1,13 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.20  Sun Oct 26 07:34:53 JST 2003
+        * if the environment variable DOCOMO_MAP exists,
+          the specified XML data will be used
+          for $HTTP::MobileAgent::DoCoMoDisplayMap::DisplayMap.
+
+0.19  Wed Oct 8 14:01:55 JST 2003
+        - Added D252i, SH252i, P252i, D505iS, N505iS, P505iS
+
 0.18  Mon Sep  1 23:43:08 JST 2003
 	- Added SH505i2 (huh?), N2102V
 

@@ -1,6 +1,7 @@
 use strict;
 use Test::More tests => 33;
 
+BEGIN { $ENV{DOCOMO_MAP} = 't/DoCoMoMap.xml' }
 use HTTP::MobileAgent;
 
 my @Tests = (
