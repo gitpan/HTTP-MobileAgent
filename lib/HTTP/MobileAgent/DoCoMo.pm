@@ -83,8 +83,6 @@ sub _parse_foma {
     }
 }
 
-sub is_docomo { 1 }
-
 sub html_version {
     my $self = shift;
     return $FOMAHTMLVersion if $self->is_foma;

@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.01;
+$VERSION = 0.02;
 
 use HTTP::MobileAgent::Request;
 
@@ -49,12 +49,6 @@ sub parse { die }
 
 sub name  { shift->{name} }
 
-# Here sare defaults
-sub is_mobile     { 1 }
-sub is_docomo     { 0 }
-sub is_j_phone    { 0 }
-sub is_ezweb      { 0 }
-
 # utility for subclasses
 sub make_accessors {
     my($class, @attr) = @_;
@@ -69,8 +63,6 @@ sub no_match {
     require Carp;
     Carp::carp($self->user_agent, ": no match. Might be new variants. ",
 	       "please contact the author of HTTP::MobileAgent!") if $^W;
-    bless $self, 'HTTP::MobileAgent::NonMobile';
-    $self->parse;
 }
 
 1;
@@ -88,15 +80,14 @@ HTTP::MobileAgent - HTTP mobile user agent string parser
   # or $agent = HTTP::MobileAgent->new; to get from %ENV
   # or $agent = HTTP::MobileAgent->new($agent_string);
 
-  if ($agent->is_docomo) {
-      # or if ($agent->name eq 'DoCoMo')
+  if ($agent->name eq 'DoCoMo') {
       # or if ($agent->isa('HTTP::MobileAgent::DoCoMo'))
       # it's NTT DoCoMo i-mode.
       # see what's available in H::MA::DoCoMo
-  } elsif ($agent->is_j_phone) {
+  } elsif ($agent->name eq 'J-PHONE') {
       # it's J-Phone.
       # see what's available in H::MA::JPhone
-  } elsif ($agent->is_ezweb) {
+  } elsif ($agent->name eq 'UP.Browser') {
       # it's KDDI/EZWeb.
       # see what's available in H::MA::EZweb
   } else {
@@ -141,18 +132,6 @@ returns User-Agent string.
   print "name: ", $agent->name;
 
 returns User-Agent name like 'DoCoMo'.
-
-=item is_mobile
-
-  if ($agent->is_mobile) {
-      # it's really a mobile agent
-  }
-
-returns if the agent is mobile or not.
-
-=item is_docomo, is_j_phone, is_ezweb
-
-returns if the agent is DoCoMo or J-Phone or EZWeb.
 
 =back
 

@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 612;
+use Test::More tests => 585;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -40,7 +40,6 @@ for (@Tests) {
     my $agent = HTTP::MobileAgent->new($ua);
     isa_ok $agent, 'HTTP::MobileAgent';
     isa_ok $agent, 'HTTP::MobileAgent::DoCoMo';
-    ok $agent->is_docomo;
     is $agent->name, 'DoCoMo';
     is $agent->user_agent, $ua,		"ua is $ua";
     is $agent->version, $data[0],	"version is $data[0]";

@@ -10,8 +10,6 @@ sub parse {
     $self->{version} = $version;
 }
 
-sub is_mobile { 0 }
-
 1;
 __END__
 
@@ -34,8 +32,6 @@ implements non-mobile or unimplemented user agents.
 =head1 METHODS
 
 See L<HTTP::MobileAgent/"METHODS"> for common methods.
-
-=back
 
 =head1 AUTHOR
 

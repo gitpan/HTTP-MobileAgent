@@ -36,8 +36,6 @@ sub parse {
     }
 }
 
-sub is_ezweb { 1 }
-
 1;
 __END__
 
@@ -115,7 +113,7 @@ returns if the agent is XHTML compliant.
 
 Parse C<X-UP-*> HTTP headers.
 
-=over 4
+=item *
 
 Spec information support listed in 
 http://www.au.kddi.com/ezfactory/tec/spec/new_win/ezkishu.html

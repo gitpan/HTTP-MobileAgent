@@ -33,8 +33,6 @@ sub parse {
     }
 }
 
-sub is_j_phone { 1 }
-
 1;
 __END__
 

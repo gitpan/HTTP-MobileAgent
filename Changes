@@ -1,4 +1,8 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.02  Mon Sep 23 09:00:40 JST 2002
+	* Removed is_* API. Use $agent->name for dispatch
+	- warn_no_match() doesn't bless to NonMobile 
+
 0.01  Fri Sep 20 23:01:05 2002
 	- original version
