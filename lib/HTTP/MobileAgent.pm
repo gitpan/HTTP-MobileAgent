@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.05;
+$VERSION = 0.06;
 
 use HTTP::MobileAgent::Request;
 
@@ -81,6 +81,17 @@ sub is_docomo  { 0 }
 sub is_j_phone { 0 }
 sub is_ezweb   { 0 }
 
+sub is_wap1 {
+    my $self = shift;
+    $self->is_ezweb && ! $self->is_wap2;
+}
+
+sub is_wap2 {
+    my $self = shift;
+    $self->is_ezweb && $self->xhtml_compliant;
+}
+
+
 1;
 __END__
 
@@ -153,7 +164,7 @@ returns User-Agent string.
 
 returns User-Agent name like 'DoCoMo'.
 
-=item is_docomo, is_j_phone, is_ezweb
+=item is_docomo, is_j_phone, is_ezweb, is_wap1, is_wap2
 
    if ($agent->is_docomo) { }
 

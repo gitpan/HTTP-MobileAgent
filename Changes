@@ -1,5 +1,8 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.06  Wed Dec  4 19:49:16 JST 2002
+	* Added is_wap1, is_wap2 utility method
+
 0.05  Mon Nov 18 19:39:40 JST 2002
 	* Fixed bug in pattern match value check (caused bug in mod_perl environment)
 

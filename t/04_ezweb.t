@@ -1,16 +1,16 @@
 use strict;
-use Test::More tests => 457;
+use Test::More tests => 460;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
 my @Tests = (
-    # ua, version, device_id, server, xhtml_compliant, comment
+    # ua, version, device_id, server, xhtml_compliant, comment, is_wap1, is_wap2
     [ 'UP.Browser/3.01-HI01 UP.Link/3.4.5.2',
-      '3.01', 'HI01', 'UP.Link/3.4.5.2', undef, undef ],
+      '3.01', 'HI01', 'UP.Link/3.4.5.2', undef, undef, 1, undef ],
     [ 'KDDI-TS21 UP.Browser/6.0.2.276 (GUI) MMP/1.1',
-      '6.0.2.276 (GUI)', 'TS21', 'MMP/1.1', 1, undef ],
+      '6.0.2.276 (GUI)', 'TS21', 'MMP/1.1', 1, undef, undef, 1 ],
     [ 'UP.Browser/3.04-TS14 UP.Link/3.4.4 (Google WAP Proxy/1.0)',
-      '3.04', 'TS14', 'UP.Link/3.4.4', undef, 'Google WAP Proxy/1.0' ],
+      '3.04', 'TS14', 'UP.Link/3.4.4', undef, 'Google WAP Proxy/1.0', 1, undef ],
 );
 
 for (@Tests) {
@@ -27,6 +27,8 @@ for (@Tests) {
     is $agent->server, $data[2];
     is $agent->xhtml_compliant, $data[3];
     is $agent->comment, $data[4];
+    ok $agent->is_wap1 if $data[5];
+    ok $agent->is_wap2 if $data[6];
 }
 
 while (<DATA>) {
