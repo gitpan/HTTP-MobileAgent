@@ -10,6 +10,8 @@ sub parse {
     $self->{version} = $version;
 }
 
+sub is_non_mobile { 1 }
+
 1;
 __END__
 

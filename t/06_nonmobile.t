@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 660;
+use Test::More tests => 825;
 use HTTP::MobileAgent;
 
 while (<DATA>) {
@@ -10,6 +10,7 @@ while (<DATA>) {
     ok ! $agent->is_docomo;
     ok ! $agent->is_j_phone;
     ok ! $agent->is_ezweb;
+    ok $agent->is_non_mobile;
 }
 
 __END__
