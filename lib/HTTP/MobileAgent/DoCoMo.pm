@@ -2,7 +2,7 @@ package HTTP::MobileAgent::DoCoMo;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.12;
+$VERSION = 0.13;
 
 use base qw(HTTP::MobileAgent);
 
@@ -122,7 +122,7 @@ sub vendor {
 
 sub _make_display {
     my $self = shift;
-    my $display = $DisplayMap->{$self->model};
+    my $display = $DisplayMap->{uc($self->model)};
     if ($self->{display_bytes}) {
 	my($w, $h) = split /\*/, $self->{display_bytes};
 	$display->{width_bytes}  = $w;

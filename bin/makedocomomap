@@ -17,7 +17,7 @@ sub do_task {
     my %map;
     while ($html =~ /$re/gs) {
 	my($model, $width, $height, $color, $depth) = ($1, $2, $3, $4, $5);
-	$map{$model} = {
+	$map{uc($model)} = {
 	    width => $width,
 	    height => $height,
 	    color => $color eq '¥«¥é¡¼',
