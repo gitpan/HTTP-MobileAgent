@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 312;
+use Test::More tests => 457;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -19,6 +19,7 @@ for (@Tests) {
     isa_ok $agent, 'HTTP::MobileAgent';
     isa_ok $agent, 'HTTP::MobileAgent::EZweb';
     is $agent->name, 'UP.Browser';
+    ok !$agent->is_docomo && !$agent->is_j_phone && $agent->is_ezweb;
     is $agent->user_agent, $ua,		"ua is $ua";
 
     is $agent->version, $data[0];
@@ -35,6 +36,7 @@ while (<DATA>) {
     my $agent = HTTP::MobileAgent->new;
     isa_ok $agent, 'HTTP::MobileAgent', "$_";
     is $agent->name, 'UP.Browser';
+    ok !$agent->is_docomo && !$agent->is_j_phone && $agent->is_ezweb;
 }
 
 __END__

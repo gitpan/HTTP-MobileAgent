@@ -2,7 +2,7 @@ package HTTP::MobileAgent::JPhone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.03;
+$VERSION = 0.04;
 
 use base qw(HTTP::MobileAgent);
 
@@ -10,6 +10,8 @@ __PACKAGE__->make_accessors(
     qw(name version model packet_compliant
        serial_number vendor vendor_version java_info)
 );
+
+sub is_j_phone { 1 }
 
 sub parse {
     my $self = shift;

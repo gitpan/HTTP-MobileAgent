@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 585;
+use Test::More tests => 762;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -33,6 +33,7 @@ my @Tests = (
     [ "DoCoMo/1.0/eggy/c300/s32/kPHS-K", '1.0', '3.2', 'eggy', 300, undef, undef, undef, { bandwidth => 32 } ],
     [ "DoCoMo/1.0/P751v/c100/s64/kPHS-K", '1.0', '3.2', 'P751v', 100, undef, 'P', undef, { bandwidth => 64 } ],
     [ "DoCoMo/1.0/P209is (Google CHTML Proxy/1.0)", '1.0', '2.0', 'P209is', 5, undef, 'P', '209i', { comment => 'Google CHTML Proxy/1.0' } ],
+    [ "DoCoMo/1.0/F212i/c10/TB", '1.0', '4.0', 'F212i', 10, undef, 'F', '212i' ],
 );
 
 for (@Tests) {
@@ -40,6 +41,7 @@ for (@Tests) {
     my $agent = HTTP::MobileAgent->new($ua);
     isa_ok $agent, 'HTTP::MobileAgent';
     isa_ok $agent, 'HTTP::MobileAgent::DoCoMo';
+    ok $agent->is_docomo && ! $agent->is_j_phone && ! $agent->is_ezweb;
     is $agent->name, 'DoCoMo';
     is $agent->user_agent, $ua,		"ua is $ua";
     is $agent->version, $data[0],	"version is $data[0]";
@@ -62,6 +64,7 @@ while (<DATA>) {
     my $agent = HTTP::MobileAgent->new;
     isa_ok $agent, 'HTTP::MobileAgent', "$_";
     is $agent->name, 'DoCoMo';
+    ok $agent->is_docomo && ! $agent->is_j_phone && ! $agent->is_ezweb;
 }
 
 __END__

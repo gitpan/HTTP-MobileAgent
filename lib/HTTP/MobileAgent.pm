@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.03;
+$VERSION = 0.04;
 
 use HTTP::MobileAgent::Request;
 
@@ -75,6 +75,10 @@ sub no_match {
 	       "please contact the author of HTTP::MobileAgent!") if $^W;
 }
 
+sub is_docomo  { 0 }
+sub is_j_phone { 0 }
+sub is_ezweb   { 0 }
+
 1;
 __END__
 
@@ -90,14 +94,15 @@ HTTP::MobileAgent - HTTP mobile user agent string parser
   # or $agent = HTTP::MobileAgent->new; to get from %ENV
   # or $agent = HTTP::MobileAgent->new($agent_string);
 
-  if ($agent->name eq 'DoCoMo') {
+  if ($agent->is_docomo) {
+      # or if ($agent->name eq 'DoCoMo')
       # or if ($agent->isa('HTTP::MobileAgent::DoCoMo'))
       # it's NTT DoCoMo i-mode.
       # see what's available in H::MA::DoCoMo
-  } elsif ($agent->name eq 'J-PHONE') {
+  } elsif ($agent->is_j_phone) {
       # it's J-Phone.
       # see what's available in H::MA::JPhone
-  } elsif ($agent->name eq 'UP.Browser') {
+  } elsif ($agent->is_ezweb) {
       # it's KDDI/EZWeb.
       # see what's available in H::MA::EZweb
   } else {
@@ -145,6 +150,12 @@ returns User-Agent string.
   print "name: ", $agent->name;
 
 returns User-Agent name like 'DoCoMo'.
+
+=item is_docomo, is_j_phone, is_ezweb
+
+   if ($agent->is_docomo) { }
+
+returns if the agent is DoCoMo, J-Phone or EZweb.
 
 =item display
 

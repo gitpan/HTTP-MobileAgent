@@ -10,6 +10,12 @@ use vars qw(@EXPORT_OK $DisplayMap);
 @EXPORT_OK = qw($DisplayMap);
 
 $DisplayMap = {
+  'F212i' => {
+    'width' => 132,
+    'height' => 136,
+    'depth' => 65536,
+    'color' => 1
+  },
   'P503iS' => {
     'width' => 120,
     'height' => 130,
@@ -160,6 +166,12 @@ $DisplayMap = {
     'depth' => 4096,
     'color' => 1
   },
+  'SO212i' => {
+    'width' => 120,
+    'height' => 112,
+    'depth' => 65536,
+    'color' => 1
+  },
   'D210i' => {
     'width' => 96,
     'height' => 91,
@@ -195,6 +207,12 @@ $DisplayMap = {
     'height' => 84,
     'depth' => 2,
     'color' => ''
+  },
+  'P504iS' => {
+    'width' => 132,
+    'height' => 144,
+    'depth' => 65536,
+    'color' => 1
   },
   'N210i' => {
     'width' => 118,
@@ -344,6 +362,12 @@ $DisplayMap = {
     'width' => 96,
     'height' => 98,
     'depth' => 4096,
+    'color' => 1
+  },
+  'SH251iS' => {
+    'width' => 176,
+    'height' => 187,
+    'depth' => 65536,
     'color' => 1
   },
   'P502i' => {

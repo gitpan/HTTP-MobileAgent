@@ -2,13 +2,15 @@ package HTTP::MobileAgent::EZweb;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.03;
+$VERSION = 0.04;
 
 use base qw(HTTP::MobileAgent);
 
 __PACKAGE__->make_accessors(
     qw(version device_id server xhtml_compliant comment)
 );
+
+sub is_ezweb { 1 }
 
 sub parse {
     my $self = shift;

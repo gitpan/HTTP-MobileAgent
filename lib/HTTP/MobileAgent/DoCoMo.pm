@@ -2,7 +2,7 @@ package HTTP::MobileAgent::DoCoMo;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.03;
+$VERSION = 0.04;
 
 use base qw(HTTP::MobileAgent);
 
@@ -24,10 +24,11 @@ $HTMLVerMap = [
     qr/[DFNP]501i/ => '1.0',
     qr/502i|821i|209i|691i|(F|N|P|KO)210i|^F671i$/ => '2.0',
     qr/(D210i|SO210i)|503i|211i|SH251i|692i/ => '3.0',
-    qr/504i|[DF]251i|^F671iS$/ => '4.0',
+    qr/504i|251i|^F671iS$|212i/ => '4.0',
     qr/eggy|P751v/ => '3.2',
 ];
 
+sub is_docomo { 1 }
 
 sub parse {
     my $self = shift;

@@ -4,6 +4,9 @@ __PACKAGE__->HTTP::MobileAgent::make_accessors(
     qw(width height color depth)
 );
 
+use vars qw($VERSION);
+$VERSION = 0.04;
+
 sub new {
     my($class, %data) = @_;
     bless {%data}, $class;
