@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = q(0.10);
+$VERSION = 0.11;
 
 use HTTP::MobileAgent::Request;
 
@@ -214,6 +214,11 @@ features. So I made this module as a separated one.
 If you have any idea / request for this module to add new subclass,
 I'm open to the discussion or (more preferable) patches. Feel free to
 mail me.
+
+=head1 OTHER LANGUAGE BINDINGS
+
+This module is now ported to PHP as Net::UserAgent::Mobile by Atsuhiro
+KUBO.  See http://pear.php.net/package-info.php?pacid=180 for details.
 
 =head1 AUTHOR
 

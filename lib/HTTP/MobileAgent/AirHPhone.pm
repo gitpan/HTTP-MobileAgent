@@ -2,7 +2,7 @@ package HTTP::MobileAgent::AirHPhone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = q(0.10);
+$VERSION = 0.11;
 
 use base qw(HTTP::MobileAgent);
 

@@ -2,7 +2,7 @@ package HTTP::MobileAgent::DoCoMo;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = q(0.10);
+$VERSION = 0.11;
 
 use base qw(HTTP::MobileAgent);
 
@@ -14,7 +14,7 @@ __PACKAGE__->make_accessors(
 use HTTP::MobileAgent::DoCoMoDisplayMap qw($DisplayMap);
 
 # various preferences
-use vars qw($DefaultCacheSize $HTMLVerMap $FOMAHTMLVersion);
+use vars qw($DefaultCacheSize $HTMLVerMap $GPSModels);
 $DefaultCacheSize = 5;
 
 # http://www.nttdocomo.co.jp/p_s/imode/spec/useragent.html
@@ -27,6 +27,8 @@ $HTMLVerMap = [
     qr/eggy|P751v/ => '3.2',
     qr/505i/ => '5.0',
 ];
+
+$GPSModels = { map { $_ => 1 } qw(F661i) };
 
 sub is_docomo { 1 }
 
@@ -127,6 +129,11 @@ sub _make_display {
 	$display->{height_bytes} = $h;
     }
     return HTTP::MobileAgent::Display->new(%$display);
+}
+
+sub is_gps {
+    my $self = shift;
+    return exists $GPSModels->{$self->model};
 }
 
 1;

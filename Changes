@@ -1,5 +1,10 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.11  Wed May 21 20:54:34 JST 2003
+	* Added is_gps() method in DoCoMo
+	- Reference for PHP port in POD
+	- Added D505i (auto-generated)
+
 0.10  Tue May  6 18:10:43 JST 2003
 	* Added DoCoMo 505i & i-mode HTML 5.0 support
 	- Added F661i (HTML 4.0)

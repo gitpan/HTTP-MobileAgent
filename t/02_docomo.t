@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 787;
+use Test::More tests => 800;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -36,6 +36,7 @@ my @Tests = (
     [ "DoCoMo/1.0/F212i/c10/TB", '1.0', '4.0', 'F212i', 10, undef, 'F', '212i' ],
     [ "DoCoMo/2.0 N2051(c100;TB)", '2.0', '4.0', 'N2051', 100, 1, 'N', 'FOMA' ],
     [ "DoCoMo/1.0/D505i/c20/TC/W20H10", '1.0', '5.0', 'D505i', 20, undef, 'D', '505i', { status => 'TC' } ],
+    [ "DoCoMo/1.0/F661i/c10/TB", '1.0', '4.0', 'F661i', 10, undef, 'F', '661i', { is_gps => 1 } ],
 );
 
 for (@Tests) {

@@ -244,6 +244,12 @@ $DisplayMap = {
     'depth' => 65536,
     'color' => 1
   },
+  'D505i' => {
+    'width' => 240,
+    'height' => 270,
+    'depth' => 262144,
+    'color' => 1
+  },
   'N210i' => {
     'width' => 118,
     'height' => 113,
