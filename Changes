@@ -1,5 +1,8 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.15  Wed Jul  9 01:31:17 JST 2003
+	- Added TB (status) support for FOMA
+
 0.14  Tue Jul  1 21:25:25 JST 2003
 	- Added N505i (auto-generated)
 

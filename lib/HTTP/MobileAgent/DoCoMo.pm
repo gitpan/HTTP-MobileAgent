@@ -2,7 +2,7 @@ package HTTP::MobileAgent::DoCoMo;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.14;
+$VERSION = 0.15;
 
 use base qw(HTTP::MobileAgent);
 
@@ -84,6 +84,7 @@ sub _parse_foma {
 	    /^c(\d+)$/      and $self->{cache_size} = $1, next;
 	    /^ser(\w{15})$/ and $self->{serial_number} = $1, next;
 	    /^icc(\w{20})$/ and $self->{card_id} = $1, next;
+	    /^(T[CDBJ])$/   and $self->{status} = $1, next;
 	    $self->no_match;
 	}
     }
