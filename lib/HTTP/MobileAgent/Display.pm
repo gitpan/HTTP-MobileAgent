@@ -5,7 +5,7 @@ __PACKAGE__->HTTP::MobileAgent::make_accessors(
 );
 
 use vars qw($VERSION);
-$VERSION = 0.16;
+$VERSION = 0.17;
 
 sub new {
     my($class, %data) = @_;

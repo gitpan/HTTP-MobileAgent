@@ -2,7 +2,7 @@ package HTTP::MobileAgent::EZweb;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.16;
+$VERSION = 0.17;
 
 use base qw(HTTP::MobileAgent);
 
