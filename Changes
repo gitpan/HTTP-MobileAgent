@@ -1,5 +1,13 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.23_01 Thu Mar 10 02:10:42 JST 2005
+    - Developer Release
+    * Added is_type_3gc method in Vodafone
+    * Added AH-K3001V (Air H" Phone)
+    - Added HTML 4.0 & 5.0 support models in html_version 
+    * Fixed problem that make(xml)?docomomap programs couldn't parse
+      current web page exactly.
+
 0.22 Fri Jun 11 14:42:55 JST 2004
     * Fixed bug model returns '' in EZweb
 

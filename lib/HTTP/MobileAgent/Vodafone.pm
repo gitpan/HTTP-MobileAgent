@@ -21,43 +21,105 @@ sub carrier_longname { 'Vodafone' }
 
 
 sub is_type_c {
-	my $self = shift;
-	return 1 if $self->version =~ /^3\./;
-	return 1 if $self->version =~ /^2\./;
+    my $self = shift;
+    return if $self->is_type_3gc;
+    return 1 if $self->version =~ /^3\./;
+    return 1 if $self->version =~ /^2\./;
 }
 
 sub is_type_p {
-	return 1 if shift->version =~ /^4\./;
+    my $self = shift;
+    return if $self->is_type_3gc;
+    return 1 if $self->version =~ /^4\./;
 }
 
 sub is_type_w {
-	return 1 if shift->version =~ /^5\./;
+    my $self = shift;
+    return if $self->is_type_3gc;
+    return 1 if $self->version =~ /^5\./;
+}
+
+sub is_type_3gc {
+    return shift->{type_3gc};
 }
 
 
 sub parse {
     my $self = shift;
+
+    return $self->_parse_3gc if($self->user_agent =~ /^Vodafone/);
+    return $self->_parse_motorola_3gc if($self->user_agent =~ /^MOT-/);
+
+    $self->{type_3gc} = 0;
+    
     my($main, @rest) = split / /, $self->user_agent;
 
     if (@rest) {
-	# J-PHONE/4.0/J-SH51/SNJSHA3029293 SH/0001aa Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0
-	$self->{packet_compliant} = 1;
-	@{$self}{qw(name version model serial_number)} = split m!/!, $main;
-	if ($self->{serial_number}) {
-	    $self->{serial_number} =~ s/^SN// or return $self->no_match;
-	}
+    # J-PHONE/4.0/J-SH51/SNJSHA3029293 SH/0001aa Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0
+    $self->{packet_compliant} = 1;
+    @{$self}{qw(name version model serial_number)} = split m!/!, $main;
+    if ($self->{serial_number}) {
+        $self->{serial_number} =~ s/^SN// or return $self->no_match;
+    }
 
-	my $vendor = shift @rest;
-	@{$self}{qw(vendor vendor_version)} = split m!/!, $vendor;
+    my $vendor = shift @rest;
+    @{$self}{qw(vendor vendor_version)} = split m!/!, $vendor;
 
-	my %java_info = map split(m!/!), @rest;
-	$self->{java_info} = \%java_info;
+    my %java_info = map split(m!/!), @rest;
+    $self->{java_info} = \%java_info;
     }
     else {
-	# J-PHONE/2.0/J-DN02
-	@{$self}{qw(name version model)} = split m!/!, $main;
-	$self->{vendor} = ($self->{model} =~ /J-([A-Z]+)/)[0] if $self->{model};
+    # J-PHONE/2.0/J-DN02
+    @{$self}{qw(name version model)} = split m!/!, $main;
+    $self->{vendor} = ($self->{model} =~ /J-([A-Z]+)/)[0] if $self->{model};
     }
+        
+}
+
+#for 3gc orz
+sub _parse_3gc {
+    my $self = shift;
+    
+    #Vodafone/1.0/V802SE/SEJ001 Browser/SEMC-Browser/4.1 Profile/MIDP-2.0 Configuration/CLDC-1.1
+    #Vodafone/1.0/V702NK/NKJ001 Series60/2.6 Profile/MIDP-2.0 Configuration/CLDC-1.1'
+    
+    my($main, @rest) = split / /, $self->user_agent;
+    $self->{packet_compliant} = 1;
+    $self->{type_3gc} = 1;
+
+    @{$self}{qw(name version model _maker serial_number)} = split m!/!, $main;
+    if ($self->{serial_number}) {
+        $self->{serial_number} =~ s/^SN// or return $self->no_match;
+    }
+    
+    #model from x-jphone-msname
+    $self->{model} = $ENV{'HTTP_X_JPHONE_MSNAME'};    
+
+    my($java_info) = $self->user_agent =~ /(Profile.*)$/;
+    my %java_info = map split(m!/!), split / /,$java_info;
+    $self->{java_info} = \%java_info;
+
+}
+
+#for motorola 3gc
+sub _parse_motorola_3gc{
+    my $self = shift;
+    my($main, @rest) = split / /, $self->user_agent;
+
+    #MOT-V980/80.2B.04I MIB/2.2.1 Profile/MIDP-2.0 Configuration/CLDC-1.1
+    
+    $self->{packet_compliant} = 1;
+    $self->{type_3gc} = 1;
+
+    @{$self}{qw(name)} = split m!/!, $main;
+
+    shift @rest;
+    my %java_info = map split(m!/!), @rest;
+    $self->{java_info} = \%java_info;
+
+    #model from x-jphone-msname
+    $self->{model} = $ENV{'HTTP_X_JPHONE_MSNAME'}; 
+    
 }
 
 sub _make_display {
@@ -66,14 +128,14 @@ sub _make_display {
 
     my($color, $depth);
     if (my $c_str = $self->get_header('x-jphone-color')) {
-	($color, $depth) = $c_str =~ /^([CG])(\d+)$/;
+    ($color, $depth) = $c_str =~ /^([CG])(\d+)$/;
     }
 
     return HTTP::MobileAgent::Display->new(
-	width  => $width,
-	height => $height,
-	color  => $color eq 'C',
-	depth  => $depth,
+    width  => $width,
+    height => $height,
+    color  => $color eq 'C',
+    depth  => $depth,
     );
 }
 
@@ -92,9 +154,9 @@ HTTP::MobileAgent::Vodafone - Vodafone implementation
   local $ENV{HTTP_USER_AGENT} = "J-PHONE/2.0/J-DN02";
   my $agent = HTTP::MobileAgent->new;
 
-  printf "Name: %s\n", $agent->name;		# "J-PHONE"
-  printf "Version: %s\n", $agent->version;	# 2.0
-  printf "Model: %s\n", $agent->model;		# "J-DN02"
+  printf "Name: %s\n", $agent->name;        # "J-PHONE"
+  printf "Version: %s\n", $agent->version;  # 2.0
+  printf "Model: %s\n", $agent->model;      # "J-DN02"
   print  "Packet is compliant.\n" if $agent->packet_compliant; # false
 
   # only availabe in Java compliant
@@ -103,7 +165,7 @@ HTTP::MobileAgent::Vodafone - Vodafone implementation
   printf "Vendor: %s\n", $agent->vendor;        # 'SH'
   printf "Vender Version: %s\n", $agent->vendor_version; # "0001a"
 
-  my $info = $self->java_info;		# hash reference
+  my $info = $self->java_info;      # hash reference
   print map { "$_: $info->{$_}\n" } keys %$info;
 
 =head1 DESCRIPTION

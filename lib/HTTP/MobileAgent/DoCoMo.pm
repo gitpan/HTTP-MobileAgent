@@ -23,12 +23,12 @@ $HTMLVerMap = [
     qr/[DFNP]501i/ => '1.0',
     qr/502i|821i|209i|691i|(F|N|P|KO)210i|^F671i$/ => '2.0',
     qr/(D210i|SO210i)|503i|211i|SH251i|692i|200[12]|2101V/ => '3.0',
-    qr/504i|251i|^F671iS$|^F661i$|212i|2051|2102V|2701/ => '4.0',
+    qr/504i|251i|^F671iS$|^F661i$|^F672i$|212i|SO213i|2051|2102V|2701/ => '4.0',
     qr/eggy|P751v/ => '3.2',
-    qr/505i|252i/ => '5.0',
+    qr/505i|506i|252i|253i|P213i|900i|901i|700i|880i/ => '5.0',
 ];
 
-$GPSModels = { map { $_ => 1 } qw(F661i) };
+$GPSModels = { map { $_ => 1 } qw(F661i F505iGPS) };
 
 sub is_docomo { 1 }
 
@@ -86,10 +86,11 @@ sub _parse_foma {
     if ($foma =~ s/^\((.*?)\)$//) {
 	my @options = split /;/, $1;
 	for (@options) {
-	    /^c(\d+)$/      and $self->{cache_size} = $1, next;
-	    /^ser(\w{15})$/ and $self->{serial_number} = $1, next;
-	    /^icc(\w{20})$/ and $self->{card_id} = $1, next;
-	    /^(T[CDBJ])$/   and $self->{status} = $1, next;
+	    /^c(\d+)$/       and $self->{cache_size} = $1, next;
+	    /^ser(\w{15})$/  and $self->{serial_number} = $1, next;
+	    /^icc(\w{20})$/  and $self->{card_id} = $1, next;
+	    /^(T[CDBJ])$/    and $self->{status} = $1, next;
+            /^W(\d+)H(\d+)$/ and $self->{display_bytes} = "$1*$2", next;
 	    $self->no_match;
 	}
     }

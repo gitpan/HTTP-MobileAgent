@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.22;
+$VERSION = '0.23_01';
 
 use HTTP::MobileAgent::Request;
 
@@ -18,10 +18,12 @@ use vars qw($MobileAgentRE);
 # detailed analysis is done in subclass's parse()
 my $DoCoMoRE = '^DoCoMo/\d\.\d[ /]';
 my $JPhoneRE = '^J-PHONE/\d\.\d';
+my $VodafoneRE = '^Vodafone/\d\.\d';
+my $VodafoneMotRE = '^MOT-';
 my $EZwebRE  = '^(?:KDDI-[A-Z]+\d+ )?UP\.Browser\/';
 my $AirHRE   = '^Mozilla/3\.0\(DDIPOCKET\;';
 
-$MobileAgentRE = qr/(?:($DoCoMoRE)|($JPhoneRE)|($EZwebRE)|($AirHRE))/;
+$MobileAgentRE = qr/(?:($DoCoMoRE)|($JPhoneRE)|($VodafoneRE)|($VodafoneMotRE)|($EZwebRE)|($AirHRE))/;
 
 sub new {
     my($class, $stuff) = @_;
@@ -31,13 +33,14 @@ sub new {
     my $ua = $request->get('User-Agent');
     my $sub = 'NonMobile';
     if ($ua =~ /$MobileAgentRE/) {
-	$sub = $1 ? 'DoCoMo' : $2 ? 'JPhone' : $3 ? 'EZweb' : 'AirHPhone';
+        $sub = $1 ? 'DoCoMo' : $2 ? 'JPhone' : $3 ? 'JPhone' : $4 ? 'JPhone' : $5 ? 'EZweb' :  'AirHPhone';
     }
 
     my $self = bless { _request => $request }, "$class\::$sub";
     $self->parse;
     return $self;
 }
+
 
 sub user_agent {
     my $self = shift;

@@ -59,7 +59,7 @@ BEGIN {
     }
 }
 
-$DisplayMap ||= %s
+$DisplayMap ||= %s;
 
 1;
 TEMPLATE
@@ -71,9 +71,9 @@ TEMPLATE
 
 sub regexp {
     return <<'RE';
-<TD><FONT SIZE="2">([A-Z]+\d+\w*)</FONT></TD>
-<TD><FONT SIZE="2">.*?</FONT></TD>
-<TD><FONT SIZE="2">.*?</FONT></TD>
+<TD><FONT SIZE="2">([A-Z]+\d+\w*).*?</FONT></TD>
+<TD><FONT SIZE="2">.*?(?:</FONT></TD>)?
+<TD><FONT SIZE="2">.*?(?:</FONT></TD>)?
 <TD><FONT SIZE="2">(.*?)¡ß(.*?)</FONT></TD>
 <TD><FONT SIZE="2">.*?</FONT></TD>
 <TD><FONT SIZE="2">(Çò¹õ|¥«¥é¡¼)(?:.*?)(\d+)(?:¿§|³¬Ä´)</FONT></TD>
