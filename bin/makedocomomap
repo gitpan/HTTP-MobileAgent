@@ -1,5 +1,6 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 use strict;
+use FindBin;
 use Jcode;
 use LWP::Simple;
 use Data::Dumper;
@@ -23,11 +24,16 @@ sub do_task {
 	    depth => $depth,
 	};
     }
-    output_code(\%map);
+    my $overwrite = $ARGV[0] && $ARGV[0] eq '-o';
+    output_code(\%map, $overwrite);
 }
 
 sub output_code {
-    my $map = shift;
+    my($map, $overwrite) = @_;
+    if ($overwrite) {
+	open MAP, "> $FindBin::Bin/../lib/HTTP/MobileAgent/DoCoMoDisplayMap.pm" or die $!;
+	select MAP;
+    }
     $Data::Dumper::Indent = 1;
     printf <<'TEMPLATE', Data::Dumper->Dump([ $map ], [ qw(DisplayMap) ]);
 package HTTP::MobileAgent::DoCoMoDisplayMap;
@@ -46,6 +52,9 @@ use vars qw(@EXPORT_OK $DisplayMap);
 1;
 TEMPLATE
     ;
+    if ($overwrite) {
+	close MAP;
+    }
 }
 
 sub regexp {

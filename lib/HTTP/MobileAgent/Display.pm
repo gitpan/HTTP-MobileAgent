@@ -1,11 +1,11 @@
 package HTTP::MobileAgent::Display;
 use strict;
 __PACKAGE__->HTTP::MobileAgent::make_accessors(
-    qw(width height color depth)
+    qw(width height color depth width_bytes height_bytes)
 );
 
 use vars qw($VERSION);
-$VERSION = 0.09;
+$VERSION = q(0.10);
 
 sub new {
     my($class, %data) = @_;
@@ -38,6 +38,10 @@ HTTP::MobileAgent::Display - Display information for HTTP::MobileAgent
   if ($display->color) {
       my $depth = $display->depth;
   }
+
+  # only available in DoCoMo 505i
+  my $width_bytes  = $display->width_bytes;
+  my $height_bytes = $display->height_bytes;
 
 =head1 DESCRIPTION
 

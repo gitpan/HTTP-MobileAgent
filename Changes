@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.10  Tue May  6 18:10:43 JST 2003
+	* Added DoCoMo 505i & i-mode HTML 5.0 support
+	- Added F661i (HTML 4.0)
+
 0.09  Wed Apr  2 19:16:20 JST 2003
 	* Added Air H" Phone support (AirHPhone.pm)
 	- Added P2102V, N211iS, P211iS (auto-generated)

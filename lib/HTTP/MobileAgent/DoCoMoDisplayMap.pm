@@ -106,6 +106,12 @@ $DisplayMap = {
     'depth' => 256,
     'color' => 1
   },
+  'N251iS' => {
+    'width' => 132,
+    'height' => 140,
+    'depth' => 65536,
+    'color' => 1
+  },
   'SO502i' => {
     'width' => 120,
     'height' => 120,
@@ -146,6 +152,12 @@ $DisplayMap = {
     'width' => 96,
     'height' => 91,
     'depth' => 256,
+    'color' => 1
+  },
+  'F661i' => {
+    'width' => 132,
+    'height' => 136,
+    'depth' => 65536,
     'color' => 1
   },
   'N504i' => {

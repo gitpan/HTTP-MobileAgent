@@ -2,7 +2,7 @@ package HTTP::MobileAgent::DoCoMo;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.09;
+$VERSION = q(0.10);
 
 use base qw(HTTP::MobileAgent);
 
@@ -23,8 +23,9 @@ $HTMLVerMap = [
     qr/[DFNP]501i/ => '1.0',
     qr/502i|821i|209i|691i|(F|N|P|KO)210i|^F671i$/ => '2.0',
     qr/(D210i|SO210i)|503i|211i|SH251i|692i|200[12]|2101V/ => '3.0',
-    qr/504i|251i|^F671iS$|212i|2051|2102V/ => '4.0',
+    qr/504i|251i|^F671iS$|^F661i$|212i|2051|2102V/ => '4.0',
     qr/eggy|P751v/ => '3.2',
+    qr/505i/ => '5.0',
 ];
 
 sub is_docomo { 1 }
@@ -61,9 +62,10 @@ sub _parse_main {
     }
 
     for (@rest) {
-	/^ser(\w{11})$/ and do { $self->{serial_number} = $1; next };
-	/^(T[DBJ])$/   and do { $self->{status} = $1; next };
-	/^s(\d+)$/     and do { $self->{bandwidth} = $1; next };
+	/^ser(\w{11})$/  and do { $self->{serial_number} = $1; next };
+	/^(T[CDBJ])$/    and do { $self->{status} = $1; next };
+	/^s(\d+)$/       and do { $self->{bandwidth} = $1; next };
+	/^W(\d+)H(\d+)$/ and do { $self->{display_bytes} = "$1*$2"; next; };
     }
 }
 
@@ -119,6 +121,11 @@ sub vendor {
 sub _make_display {
     my $self = shift;
     my $display = $DisplayMap->{$self->model};
+    if ($self->{display_bytes}) {
+	my($w, $h) = split /\*/, $self->{display_bytes};
+	$display->{width_bytes}  = $w;
+	$display->{height_bytes} = $h;
+    }
     return HTTP::MobileAgent::Display->new(%$display);
 }
 
@@ -153,8 +160,11 @@ HTTP::MobileAgent::DoCoMo - NTT DoCoMo implementation
   printf "Serial: %s\n", $agent->serial_number;		# "0123456789abcde"
   printf "Card ID: %s\n", $agent->card_id;		# "01234567890123456789"
 
-  # e.g.) "DoCoMo/1.0/P502i (Google CHTML Proxy/1.0)
-  pritnf "Comment: %s\n", $agent->comment;		# "Google CHTML Proxy/1.0
+  # e.g.) "DoCoMo/1.0/P502i (Google CHTML Proxy/1.0)"
+  printf "Comment: %s\n", $agent->comment;		# "Google CHTML Proxy/1.0
+
+  # e.g.) "DoCoMo/1.0/D505i/c20/TB/W20H10"
+  printf "
 
   # only available in eggy/M-stage
   # e.g.) "DoCoMo/1.0/eggy/c300/s32/kPHS-K"

@@ -2,7 +2,7 @@ package HTTP::MobileAgent::JPhone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.09;
+$VERSION = q(0.10);
 
 use base qw(HTTP::MobileAgent);
 

@@ -2,7 +2,7 @@ package HTTP::MobileAgent::AirHPhone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.09;
+$VERSION = q(0.10);
 
 use base qw(HTTP::MobileAgent);
 
@@ -21,6 +21,11 @@ sub parse {
     @{$self}{qw(vendor model model_version browser_version cache_size)} = split m!/!, $1;
     $self->{cache_size} =~ s/^c//;
 }
+
+sub _make_display {
+    # XXX
+}
+
 
 1;
 __END__
