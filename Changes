@@ -1,5 +1,8 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.14  Tue Jul  1 21:25:25 JST 2003
+	- Added N505i (auto-generated)
+
 0.13  Mon Jun 30 00:36:38 JST 2003
 	- make DoCoMoDisplayMap case-insensitive
 	  to fix P209is gotcha
