@@ -1,5 +1,10 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.09  Wed Apr  2 19:16:20 JST 2003
+	* Added Air H" Phone support (AirHPhone.pm)
+	- Added P2102V, N211iS, P211iS (auto-generated)
+	- Added FOMA HTML 4.0 support in html_version 
+
 0.08  Thu Feb 20 18:28:44 JST 2003
 	- Added is_non_mobile() method
 

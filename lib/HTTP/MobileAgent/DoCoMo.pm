@@ -2,7 +2,7 @@ package HTTP::MobileAgent::DoCoMo;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.04;
+$VERSION = 0.09;
 
 use base qw(HTTP::MobileAgent);
 
@@ -16,15 +16,14 @@ use HTTP::MobileAgent::DoCoMoDisplayMap qw($DisplayMap);
 # various preferences
 use vars qw($DefaultCacheSize $HTMLVerMap $FOMAHTMLVersion);
 $DefaultCacheSize = 5;
-$FOMAHTMLVersion  = '3.0';
 
 # http://www.nttdocomo.co.jp/p_s/imode/spec/useragent.html
 $HTMLVerMap = [
     # regex => version
     qr/[DFNP]501i/ => '1.0',
     qr/502i|821i|209i|691i|(F|N|P|KO)210i|^F671i$/ => '2.0',
-    qr/(D210i|SO210i)|503i|211i|SH251i|692i/ => '3.0',
-    qr/504i|251i|^F671iS$|212i/ => '4.0',
+    qr/(D210i|SO210i)|503i|211i|SH251i|692i|200[12]|2101V/ => '3.0',
+    qr/504i|251i|^F671iS$|212i|2051|2102V/ => '4.0',
     qr/eggy|P751v/ => '3.2',
 ];
 
@@ -76,22 +75,18 @@ sub _parse_foma {
     $self->{model} = 'SH2101V' if $1 eq 'MST_v_SH2101V'; # Huh?
 
     if ($foma =~ s/^\((.*?)\)$//) {
-	my($cache, $serial, $icc) = split /;/, $1;
-	$self->{cache_size} = substr($cache, 1);
-	if ($serial) {
-	    $serial =~ s/^ser(\w{15})$/$1/ or return $self->no_match;
-	    $self->{serial_number} = $serial;
-	}
-	if ($icc) {
-	    $icc =~ s/^icc(\w{20})$/$1/ or return $self->no_match;
-	    $self->{card_id} = $icc;
+	my @options = split /;/, $1;
+	for (@options) {
+	    /^c(\d+)$/      and $self->{cache_size} = $1, next;
+	    /^ser(\w{15})$/ and $self->{serial_number} = $1, next;
+	    /^icc(\w{20})$/ and $self->{card_id} = $1, next;
+	    $self->no_match;
 	}
     }
 }
 
 sub html_version {
     my $self = shift;
-    return $FOMAHTMLVersion if $self->is_foma;
 
     my @map = @$HTMLVerMap;
     while (my($re, $version) = splice(@map, 0, 2)) {

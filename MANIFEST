@@ -4,6 +4,7 @@ Makefile.PL
 README
 bin/makedocomomap
 lib/HTTP/MobileAgent.pm
+lib/HTTP/MobileAgent/AirHPhone.pm
 lib/HTTP/MobileAgent/Display.pm
 lib/HTTP/MobileAgent/DoCoMo.pm
 lib/HTTP/MobileAgent/DoCoMoDisplayMap.pm
@@ -18,3 +19,4 @@ t/03_j_phone.t
 t/04_ezweb.t
 t/05_display.t
 t/06_nonmobile.t
+t/07_airh.t

@@ -2,13 +2,14 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.08;
+$VERSION = 0.09;
 
 use HTTP::MobileAgent::Request;
 
 require HTTP::MobileAgent::DoCoMo;
 require HTTP::MobileAgent::JPhone;
 require HTTP::MobileAgent::EZweb;
+require HTTP::MobileAgent::AirHPhone;
 require HTTP::MobileAgent::NonMobile;
 require HTTP::MobileAgent::Display;
 
@@ -18,8 +19,9 @@ use vars qw($MobileAgentRE);
 my $DoCoMoRE = '^DoCoMo/\d\.\d[ /]';
 my $JPhoneRE = '^J-PHONE/\d\.\d';
 my $EZwebRE  = '^(?:KDDI-[A-Z]+\d+ )?UP\.Browser\/';
+my $AirHRE   = '^Mozilla/3\.0\(DDIPOCKET\;';
 
-$MobileAgentRE = qr/(?:($DoCoMoRE)|($JPhoneRE)|($EZwebRE))/;
+$MobileAgentRE = qr/(?:($DoCoMoRE)|($JPhoneRE)|($EZwebRE)|($AirHRE))/;
 
 sub new {
     my($class, $stuff) = @_;
@@ -29,7 +31,7 @@ sub new {
     my $ua = $request->get('User-Agent');
     my $sub = 'NonMobile';
     if ($ua =~ /$MobileAgentRE/) {
-	$sub = $1 ? 'DoCoMo' : $2 ? 'JPhone' : 'EZweb';
+	$sub = $1 ? 'DoCoMo' : $2 ? 'JPhone' : $3 ? 'EZweb' : 'AirHPhone';
     }
 
     my $self = bless { _request => $request }, "$class\::$sub";
@@ -80,6 +82,7 @@ sub no_match {
 sub is_docomo  { 0 }
 sub is_j_phone { 0 }
 sub is_ezweb   { 0 }
+sub is_airh_phone { 0 }
 sub is_non_mobile { 0 }
 
 sub is_wap1 {
