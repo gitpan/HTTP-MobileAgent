@@ -10,6 +10,12 @@ use vars qw(@EXPORT_OK $DisplayMap);
 @EXPORT_OK = qw($DisplayMap);
 
 $DisplayMap = {
+  'N504iS' => {
+    'width' => 160,
+    'height' => 180,
+    'depth' => 65536,
+    'color' => 1
+  },
   'F212i' => {
     'width' => 132,
     'height' => 136,
@@ -256,6 +262,12 @@ $DisplayMap = {
     'depth' => 65536,
     'color' => 1
   },
+  'D251iS' => {
+    'width' => 132,
+    'height' => 144,
+    'depth' => 262144,
+    'color' => 1
+  },
   'KO209i' => {
     'width' => 96,
     'height' => 96,
@@ -284,6 +296,12 @@ $DisplayMap = {
     'width' => 96,
     'height' => 113,
     'depth' => 4096,
+    'color' => 1
+  },
+  'P251iS' => {
+    'width' => 132,
+    'height' => 144,
+    'depth' => 65536,
     'color' => 1
   },
   'D502i' => {
@@ -337,6 +355,12 @@ $DisplayMap = {
   'P211i' => {
     'width' => 120,
     'height' => 130,
+    'depth' => 65536,
+    'color' => 1
+  },
+  'F2051' => {
+    'width' => 176,
+    'height' => 182,
     'depth' => 65536,
     'color' => 1
   },
@@ -394,6 +418,12 @@ $DisplayMap = {
     'depth' => 65536,
     'color' => 1
   },
+  'N2051' => {
+    'width' => 176,
+    'height' => 198,
+    'depth' => 65536,
+    'color' => 1
+  },
   'KO210i' => {
     'width' => 96,
     'height' => 96,
@@ -423,6 +453,12 @@ $DisplayMap = {
     'height' => 106,
     'depth' => 2,
     'color' => ''
+  },
+  'F504iS' => {
+    'width' => 132,
+    'height' => 136,
+    'depth' => 65536,
+    'color' => 1
   },
   'SO210i' => {
     'width' => 120,

@@ -1,5 +1,8 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.07  Mon Jan 27 12:04:33 JST 2003
+	- Added N504iS, D251iS, P251iS, F2051, N2051, F504iS (auto-generated)
+
 0.06  Wed Dec  4 19:49:16 JST 2002
 	* Added is_wap1, is_wap2 utility method
 
