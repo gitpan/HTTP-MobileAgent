@@ -1,6 +1,9 @@
 package HTTP::MobileAgent::EZweb;
 
 use strict;
+use vars qw($VERSION);
+$VERSION = 0.03;
+
 use base qw(HTTP::MobileAgent);
 
 __PACKAGE__->make_accessors(
@@ -19,7 +22,6 @@ sub parse {
 	my($name, $version) = split m!/!, $browser;
 	$self->{name} = $name;
 	$self->{version} = "$version $opt";
-
 	$self->{server} = $server;
     }
     else {
@@ -34,6 +36,19 @@ sub parse {
 	    $self->{comment} = $comment;
 	}
     }
+}
+
+sub _make_display {
+    my $self = shift;
+    my($width, $height) = split /,/, $self->get_header('x-up-devcap-screenpixels');
+    my $depth = (split /,/, $self->get_header('x-up-devcap-screendepth'))[0];
+    my $color = $self->get_header('x-up-devcap-iscolor');
+    return HTTP::MobileAgent::Display->new(
+	width  => $width,
+	height => $height,
+	color  => (defined $color && $color eq '1'),
+	depth  => 2 ** $depth,
+    );
 }
 
 1;
@@ -111,11 +126,7 @@ returns if the agent is XHTML compliant.
 
 =item *
 
-Parse C<X-UP-*> HTTP headers.
-
-=item *
-
-Spec information support listed in 
+Spec information support listed in
 http://www.au.kddi.com/ezfactory/tec/spec/new_win/ezkishu.html
 
 (Patches are always welcome ;))

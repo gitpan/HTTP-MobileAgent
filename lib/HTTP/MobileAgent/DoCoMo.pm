@@ -1,12 +1,17 @@
 package HTTP::MobileAgent::DoCoMo;
 
 use strict;
+use vars qw($VERSION);
+$VERSION = 0.03;
+
 use base qw(HTTP::MobileAgent);
 
 __PACKAGE__->make_accessors(
     qw(version model status bandwidth
        serial_number is_foma card_id comment)
 );
+
+use HTTP::MobileAgent::DoCoMoDisplayMap qw($DisplayMap);
 
 # various preferences
 use vars qw($DefaultCacheSize $HTMLVerMap $FOMAHTMLVersion);
@@ -113,6 +118,12 @@ sub vendor {
     my $model = $self->model;
     $model =~ /^([A-Z]+)\d/;
     return $1;
+}
+
+sub _make_display {
+    my $self = shift;
+    my $display = $DisplayMap->{$self->model};
+    return HTTP::MobileAgent::Display->new(%$display);
 }
 
 1;
@@ -235,19 +246,6 @@ undef otherwise.
 
 returns bandwidth like 32 as killobytes unit. Only vailable in eggy,
 returns undef otherwise.
-
-=back
-
-=head1 TODO
-
-=over 4
-
-=item *
-
-Region and screen size support availabe at
-http://www.nttdocomo.co.jp/p_s/imode/spec/ryouiki.html
-
-(Patches are always welcome ;))
 
 =back
 

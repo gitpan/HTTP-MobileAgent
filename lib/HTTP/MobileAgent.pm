@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.02;
+$VERSION = 0.03;
 
 use HTTP::MobileAgent::Request;
 
@@ -10,6 +10,7 @@ require HTTP::MobileAgent::DoCoMo;
 require HTTP::MobileAgent::JPhone;
 require HTTP::MobileAgent::EZweb;
 require HTTP::MobileAgent::NonMobile;
+require HTTP::MobileAgent::Display;
 
 use vars qw($MobileAgentRE);
 # this matching should be robust enough
@@ -46,8 +47,17 @@ sub get_header {
 
 # should be implemented in subclasses
 sub parse { die }
+sub _make_display { die }
 
 sub name  { shift->{name} }
+
+sub display {
+    my $self = shift;
+    unless ($self->{display}) {
+	$self->{display} = $self->_make_display;
+    }
+    return $self->{display};
+}
 
 # utility for subclasses
 sub make_accessors {
@@ -95,6 +105,9 @@ HTTP::MobileAgent - HTTP mobile user agent string parser
       # $agent is H::MA::NonMobile
   }
 
+  my $display = $agent->display;	# HTTP::MobileAgent::Display
+  if ($display->color) { ... }
+
 =head1 DESCRIPTION
 
 HTTP::MobileAgent parses HTTP_USER_AGENT strings of (mainly Japanese)
@@ -132,6 +145,13 @@ returns User-Agent string.
   print "name: ", $agent->name;
 
 returns User-Agent name like 'DoCoMo'.
+
+=item display
+
+  my $display = $agent->display;
+
+returns HTTP::MobileAgent::Display object. See
+L<HTTP::MobileAgent::Display> for details.
 
 =back
 
@@ -178,7 +198,7 @@ it under the same terms as Perl itself.
 
 L<HTTP::MobileAgent::DoCoMo>, L<HTTP::MobileAgent::JPhone>,
 L<HTTP::MobileAgent::EZweb>, L<HTTP::MobileAgent::NonMobile>,
-L<HTTP::BrowserDetect>
+L<HTTP::MobileAgent::Display>, L<HTTP::BrowserDetect>
 
 Reference URL for specification is listed in Pods for each subclass.
 

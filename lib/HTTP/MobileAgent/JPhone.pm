@@ -1,6 +1,9 @@
 package HTTP::MobileAgent::JPhone;
 
 use strict;
+use vars qw($VERSION);
+$VERSION = 0.03;
+
 use base qw(HTTP::MobileAgent);
 
 __PACKAGE__->make_accessors(
@@ -31,6 +34,23 @@ sub parse {
 	@{$self}{qw(name version model)} = split m!/!, $main;
 	$self->{vendor} = ($self->{model} =~ /J-([A-Z]+)/)[0] if $self->{model};
     }
+}
+
+sub _make_display {
+    my $self = shift;
+    my($width, $height) = split /\*/, $self->get_header('x-jphone-display');
+
+    my($color, $depth);
+    if (my $c_str = $self->get_header('x-jphone-color')) {
+	($color, $depth) = $c_str =~ /^([CG])(\d+)$/;
+    }
+
+    return HTTP::MobileAgent::Display->new(
+	width  => $width,
+	height => $height,
+	color  => $color eq 'C',
+	depth  => $depth,
+    );
 }
 
 1;
@@ -127,10 +147,6 @@ returns undef if unknown.
 =head1 TODO
 
 =over 4
-
-=item *
-
-Parse C<x-jphone-*> headers.
 
 =item *
 

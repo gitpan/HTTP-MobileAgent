@@ -2,8 +2,11 @@ Changes
 MANIFEST			This list of files
 Makefile.PL
 README
+bin/makedocomomap
 lib/HTTP/MobileAgent.pm
+lib/HTTP/MobileAgent/Display.pm
 lib/HTTP/MobileAgent/DoCoMo.pm
+lib/HTTP/MobileAgent/DoCoMoDisplayMap.pm
 lib/HTTP/MobileAgent/EZweb.pm
 lib/HTTP/MobileAgent/JPhone.pm
 lib/HTTP/MobileAgent/NonMobile.pm
@@ -13,3 +16,4 @@ t/01_request.t
 t/02_docomo.t
 t/03_j_phone.t
 t/04_ezweb.t
+t/05_display.t
