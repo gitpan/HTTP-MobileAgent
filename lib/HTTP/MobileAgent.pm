@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.04;
+$VERSION = 0.05;
 
 use HTTP::MobileAgent::Request;
 
@@ -27,8 +27,10 @@ sub new {
 
     # parse UA string
     my $ua = $request->get('User-Agent');
-    $ua =~ /$MobileAgentRE/;
-    my $sub = $1 ? 'DoCoMo' : $2 ? 'JPhone' : $3 ? 'EZweb' : 'NonMobile';
+    my $sub = 'NonMobile';
+    if ($ua =~ /$MobileAgentRE/) {
+	$sub = $1 ? 'DoCoMo' : $2 ? 'JPhone' : 'EZweb';
+    }
 
     my $self = bless { _request => $request }, "$class\::$sub";
     $self->parse;

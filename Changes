@@ -1,5 +1,8 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.05  Mon Nov 18 19:39:40 JST 2002
+	* Fixed bug in pattern match value check (caused bug in mod_perl environment)
+
 0.04  Thu Nov 14 00:47:47 JST 2002
 	* Restored is_docomo, is_j_phone, is_ezweb API for handiness
 	- Added F212i, SO212i, P504iS, SH251iS in DoCoMoDisplayMap (auto-generated)
