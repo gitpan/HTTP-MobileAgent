@@ -2,7 +2,7 @@ package HTTP::MobileAgent::DoCoMo;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.17;
+$VERSION = 0.18;
 
 use base qw(HTTP::MobileAgent);
 
@@ -57,6 +57,7 @@ sub _parse_main {
     $self->{name}    = $name;
     $self->{version} = $version;
     $self->{model}   = $model;
+    $self->{model}   = 'SH505i' if $self->{model} eq 'SH505i2';
 
     if ($cache) {
 	$cache =~ s/^c// or return $self->no_match;

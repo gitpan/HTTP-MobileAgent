@@ -1,5 +1,8 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.18  Mon Sep  1 23:43:08 JST 2003
+	- Added SH505i2 (huh?), N2102V
+
 0.17  Wed Aug  6 21:12:01 JST 2003
 	- Added P505i, N2102V (auto-generated)	
 
