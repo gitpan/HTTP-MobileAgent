@@ -2,7 +2,7 @@ package HTTP::MobileAgent::Vodafone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.18;
+$VERSION = 0.19;
 
 use base qw(HTTP::MobileAgent);
 
@@ -93,7 +93,7 @@ sub _parse_3gc {
     }
     
     #model from x-jphone-msname
-    $self->{model} = $ENV{'HTTP_X_JPHONE_MSNAME'};    
+    $self->{model} = $self->get_header('x-jphone-msname');
 
     my($java_info) = $self->user_agent =~ /(Profile.*)$/;
     my %java_info = map split(m!/!), split / /,$java_info;
@@ -118,8 +118,7 @@ sub _parse_motorola_3gc{
     $self->{java_info} = \%java_info;
 
     #model from x-jphone-msname
-    $self->{model} = $ENV{'HTTP_X_JPHONE_MSNAME'}; 
-    
+    $self->{model} = $self->get_header('x-jphone-msname');
 }
 
 sub _make_display {

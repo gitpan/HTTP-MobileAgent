@@ -25,8 +25,10 @@ my @Tests = (
 for (@Tests) {
     my($ua, @data) = @$_;
 
+    local $ENV{'HTTP_USER_AGENT'} = $ua;
+    # can't get the 3GC's "model" from user-agent.
     local $ENV{'HTTP_X_JPHONE_MSNAME'} = $data[1];
-    my $agent = HTTP::MobileAgent->new($ua);
+    my $agent = HTTP::MobileAgent->new();
     isa_ok $agent, 'HTTP::MobileAgent';
     isa_ok $agent, 'HTTP::MobileAgent::JPhone';
     ok !$agent->is_docomo && $agent->is_j_phone && $agent->is_vodafone && !$agent->is_ezweb;
