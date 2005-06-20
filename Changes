@@ -1,7 +1,9 @@
 Revision history for Perl extension HTTP::MobileAgent
 
-0.23_02 Mon May 16 12:28:19 JST 2005
+0.23_03 Mon Jun 20 13:09:10 JST 2005
+    - Added A5511T (au)
 
+0.23_02 Mon May 16 12:28:19 JST 2005
     - Fixed _parse_3gc() and _parse_motorola_3gc() in HTTP/MobileAgent/Vodafone.pm
       (Thanks to SATOH Fumiyasu)
 

@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.23_02';
+$VERSION = '0.23_03';
 
 use HTTP::MobileAgent::Request;
 
@@ -20,7 +20,7 @@ my $DoCoMoRE = '^DoCoMo/\d\.\d[ /]';
 my $JPhoneRE = '^J-PHONE/\d\.\d';
 my $VodafoneRE = '^Vodafone/\d\.\d';
 my $VodafoneMotRE = '^MOT-';
-my $EZwebRE  = '^(?:KDDI-[A-Z]+\d+ )?UP\.Browser\/';
+my $EZwebRE  = '^(?:KDDI-[A-Z]+\d+[A-Z]? )?UP\.Browser\/';
 my $AirHRE   = '^Mozilla/3\.0\(DDIPOCKET\;';
 
 $MobileAgentRE = qr/(?:($DoCoMoRE)|($JPhoneRE)|($VodafoneRE)|($VodafoneMotRE)|($EZwebRE)|($AirHRE))/;

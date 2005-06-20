@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 487;
+use Test::More tests => 490;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -77,6 +77,7 @@ KDDI-TS21 UP.Browser/6.0.5.287 (GUI) MMP/1.1
 KDDI-TS21 UP.Browser/6.0.6 (GUI) MMP/1.1
 KDDI-TS22 UP.Browser/6.0.6 (GUI) MMP/1.1
 KDDI-TS22 UP.Browser/6.0.7.1 (GUI) MMP/1.1
+KDDI-TS2A UP.Browser/6.2.0.9 (GUI) MMP/2.0
 UP.Browser/3.01-HI01 UP.Link/3.4.5.2
 UP.Browser/3.01-HI02 UP.Link/3.2.1.2
 UP.Browser/3.03-HI11 UP.Link/3.2.2.7c
