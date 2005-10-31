@@ -1,7 +1,7 @@
 use strict;
 
 use strict;
-use Test::More tests => 12;
+use Test::More tests => 14;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -35,3 +35,4 @@ while (<DATA>) {
 
 __END__
 Mozilla/3.0(DDIPOCKET;JRC/AH-J3001V,AH-J3002V/1.0/0100/c50)CNF/2.0
+Mozilla/3.0(DDIPOCKET;KYOCERA/AH-K3001V/1.4.1.67.000000/0.1/C100) Opera 7.0

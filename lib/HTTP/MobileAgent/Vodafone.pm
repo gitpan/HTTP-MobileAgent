@@ -2,7 +2,7 @@ package HTTP::MobileAgent::Vodafone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.19;
+$VERSION = 0.20;
 
 use base qw(HTTP::MobileAgent);
 
@@ -76,7 +76,7 @@ sub parse {
         
 }
 
-#for 3gc orz
+#for 3gc
 sub _parse_3gc {
     my $self = shift;
     
@@ -92,9 +92,6 @@ sub _parse_3gc {
         $self->{serial_number} =~ s/^SN// or return $self->no_match;
     }
     
-    #model from x-jphone-msname
-    $self->{model} = $self->get_header('x-jphone-msname');
-
     my($java_info) = $self->user_agent =~ /(Profile.*)$/;
     my %java_info = map split(m!/!), split / /,$java_info;
     $self->{java_info} = \%java_info;
@@ -117,8 +114,10 @@ sub _parse_motorola_3gc{
     my %java_info = map split(m!/!), @rest;
     $self->{java_info} = \%java_info;
 
-    #model from x-jphone-msname
-    $self->{model} = $self->get_header('x-jphone-msname');
+    $self->{model} = 'V702MO'  if $self->{name} eq 'MOT-V980';
+    $self->{model} = 'V702sMO' if $self->{name} eq 'MOT-C980';
+    $self->{model} ||= $self->get_header('x-jphone-msname');
+
 }
 
 sub _make_display {

@@ -53,7 +53,6 @@ while (<DATA>) {
     chomp;
     my($ua,$model) = split(/,/,$_);
     local $ENV{HTTP_USER_AGENT} = $ua;
-    local $ENV{HTTP_X_JPHONE_MSNAME} = $model;
     my $agent = HTTP::MobileAgent->new;
     isa_ok $agent, 'HTTP::MobileAgent', $ua;
     ok $agent->name && ($agent->name,'Vodafone' || $agent->name =~ /^MOT/);

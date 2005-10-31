@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.24 Mon Oct 31 16:37:29 JST 2005
+    * Added is_win method in EZweb
+    - Fixed the method parse Vodafone 3GC models
+
 0.23_03 Mon Jun 20 13:09:10 JST 2005
     - Added A5511T (au)
 

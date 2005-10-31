@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 490;
+use Test::More tests => 508;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -15,6 +15,8 @@ my @Tests = (
       '3.04', 'TST4', 'UP.Link/3.4.5.6', undef, undef, 1, undef ],
     [ 'KDDI-KCU1 UP.Browser/6.2.0.5.1 (GUI) MMP/2.0',
       '6.2.0.5.1 (GUI)', 'KCU1', 'MMP/2.0', 1, undef, undef, 1 ],
+    [ 'KDDI-SN31 UP.Browser/6.2.0.7.3.129 (GUI) MMP/2.0',
+      '6.2.0.7.3.129 (GUI)','SN31','MMP/2.0', 1, undef, undef, 1 ],
 );
 
 for (@Tests) {
@@ -24,7 +26,7 @@ for (@Tests) {
     isa_ok $agent, 'HTTP::MobileAgent::EZweb';
     is $agent->name, 'UP.Browser';
     ok !$agent->is_docomo && !$agent->is_j_phone && !$agent->is_vodafone && $agent->is_ezweb;
-    is $agent->user_agent, $ua,		"ua is $ua";
+    is $agent->user_agent, $ua,        "ua is $ua";
 
     is $agent->version, $data[0];
     is $agent->device_id, $data[1];
@@ -35,11 +37,17 @@ for (@Tests) {
     ok $agent->is_wap2 if $data[6];
 
     if ($ua eq 'UP.Browser/3.04-TST4 UP.Link/3.4.5.6' 
-    	or $ua eq 'KDDI-KCU1 UP.Browser/6.2.0.5.1 (GUI) MMP/2.0'){
-    	ok $agent->is_tuka;
-	} else {
-		ok !$agent->is_tuka;
-	}
+        or $ua eq 'KDDI-KCU1 UP.Browser/6.2.0.5.1 (GUI) MMP/2.0'){
+        ok $agent->is_tuka;
+    } else {
+        ok !$agent->is_tuka;
+    }
+
+    if ($ua eq 'KDDI-SN31 UP.Browser/6.2.0.7.3.129 (GUI) MMP/2.0'){
+        ok $agent->is_win;
+    } else {
+        ok !$agent->is_win;
+    }
 }
 
 while (<DATA>) {

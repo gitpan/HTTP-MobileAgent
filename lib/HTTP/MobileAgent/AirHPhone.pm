@@ -2,7 +2,7 @@ package HTTP::MobileAgent::AirHPhone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.19;
+$VERSION = 0.20;
 
 use base qw(HTTP::MobileAgent);
 
@@ -21,9 +21,9 @@ sub name { 'DDIPOCKET' }
 sub parse {
     my $self = shift;
     my $ua = $self->user_agent;
-    $ua =~ m!^Mozilla/3\.0\(DDIPOCKET;(.*)\)CNF/2\.0$! or $self->no_match;
+    $ua =~ m!^Mozilla/3\.0\(DDIPOCKET;(.*)\)! or $self->no_match;
     @{$self}{qw(vendor model model_version browser_version cache_size)} = split m!/!, $1;
-    $self->{cache_size} =~ s/^c//;
+    $self->{cache_size} =~ s/^c//i;
 }
 
 sub _make_display {

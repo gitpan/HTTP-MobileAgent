@@ -2,7 +2,7 @@ package HTTP::MobileAgent::EZweb;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.19;
+$VERSION = 0.20;
 
 use base qw(HTTP::MobileAgent);
 
@@ -24,6 +24,13 @@ sub is_tuka {
   } else {
       return 1 if $tuka eq 'T';
   }
+  return;
+}
+
+sub is_win {
+  my $self = shift;
+  my $win = substr($self->device_id, 2, 1);
+  $win eq '3' ? 1 : 0;
 }
 
 sub parse {
@@ -134,6 +141,18 @@ returns comment like "Google WAP Proxy/1.0". returns undef if nothinng.
   if ($agent->xhtml_compliant) { }
 
 returns if the agent is XHTML compliant.
+
+=item is_tuka
+
+  if ($agent->is_tuka) { }
+
+returns if the agent is TU-KA model.
+
+=item is_win
+
+  if ($agent->is_win) { }
+
+returns if the agent is win model.
 
 =back
 
