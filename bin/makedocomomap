@@ -12,7 +12,7 @@ do_task(@ARGV);
 
 sub do_task {
     my $html = Jcode->new(get($URL))->tr('£°-£¹', '0-9')->euc;
-    $html =~ s/\n+/\n/g;
+    $html =~ s/(?:\r?\n)+/\n/g;
     my $re = regexp();
     my %map;
     while ($html =~ /$re/igs) {

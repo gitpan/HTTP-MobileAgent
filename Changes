@@ -1,5 +1,16 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.25 Wed Feb  8 23:14:05 JST 2006
+    * Fixed problem that make(xml)?docomomap programs couldn't parse
+      current web page exactly.
+      (Thanks to MATSUNO Tokuhiro)
+    - Added D701i, D701iWM, D901iS, D902i, F700iS, F901iS, F902i,
+      N701i, N901iS, N902i, P701iD, P851i, P901iS, P902i, SA700iS,
+      SH700iS, SH851i, SH901iS, SH902i, SO213iWR, SO506iS
+      in DoCoMoDisplayMap (auto-generated)
+    * Added WX310K,WS300K,WX310SA (Air H" Phone)
+    * name returns 'DDIPOCKET' or 'WILLCOM' in Air H" Phone
+
 0.24 Mon Oct 31 16:37:29 JST 2005
     * Added is_win method in EZweb
     - Fixed the method parse Vodafone 3GC models
@@ -35,12 +46,12 @@ Revision history for Perl extension HTTP::MobileAgent
     - model and device_id return '' in NonMobile
 
 0.20  Sun Oct 26 07:34:53 JST 2003
-        * if the environment variable DOCOMO_MAP exists,
-          the specified XML data will be used
-          for $HTTP::MobileAgent::DoCoMoDisplayMap::DisplayMap.
+    * if the environment variable DOCOMO_MAP exists,
+      the specified XML data will be used
+      for $HTTP::MobileAgent::DoCoMoDisplayMap::DisplayMap.
 
 0.19  Wed Oct 8 14:01:55 JST 2003
-        - Added D252i, SH252i, P252i, D505iS, N505iS, P505iS
+    - Added D252i, SH252i, P252i, D505iS, N505iS, P505iS
 
 0.18  Mon Sep  1 23:43:08 JST 2003
     - Added SH505i2 (huh?), N2102V

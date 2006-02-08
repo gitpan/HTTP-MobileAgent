@@ -2,7 +2,7 @@ package HTTP::MobileAgent::AirHPhone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.20;
+$VERSION = 0.21;
 
 use base qw(HTTP::MobileAgent);
 
@@ -16,13 +16,12 @@ sub carrier { 'H' }
 
 sub carrier_longname { 'AirH' }
 
-sub name { 'DDIPOCKET' }
-
 sub parse {
     my $self = shift;
     my $ua = $self->user_agent;
-    $ua =~ m!^Mozilla/3\.0\(DDIPOCKET;(.*)\)! or $self->no_match;
-    @{$self}{qw(vendor model model_version browser_version cache_size)} = split m!/!, $1;
+    $ua =~ m!^Mozilla/3\.0\((WILLCOM|DDIPOCKET);(.*)\)! or $self->no_match;
+    $self->{name} = $1;
+    @{$self}{qw(vendor model model_version browser_version cache_size)} = split m!/!, $2;
     $self->{cache_size} =~ s/^c//i;
 }
 
