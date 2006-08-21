@@ -2,12 +2,12 @@ package HTTP::MobileAgent::Vodafone;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.20;
+$VERSION = 0.21;
 
 use base qw(HTTP::MobileAgent);
 
 __PACKAGE__->make_accessors(
-    qw(name version model packet_compliant
+    qw(name version model type packet_compliant
        serial_number vendor vendor_version java_info)
 );
 
@@ -15,98 +15,103 @@ sub is_j_phone { shift->is_vodafone }
 
 sub is_vodafone { 1 }
 
+sub is_softbank { shift->is_vodafone }
+
 sub carrier { 'V' }
 
 sub carrier_longname { 'Vodafone' }
 
-
-sub is_type_c {
-    my $self = shift;
-    return if $self->is_type_3gc;
-    return 1 if $self->version =~ /^3\./;
-    return 1 if $self->version =~ /^2\./;
-}
-
-sub is_type_p {
-    my $self = shift;
-    return if $self->is_type_3gc;
-    return 1 if $self->version =~ /^4\./;
-}
-
-sub is_type_w {
-    my $self = shift;
-    return if $self->is_type_3gc;
-    return 1 if $self->version =~ /^5\./;
-}
-
-sub is_type_3gc {
-    return shift->{type_3gc};
-}
-
+sub is_type_c   { shift->{type} =~ /^C/ }
+sub is_type_p   { shift->{type} =~ /^P/ }
+sub is_type_w   { shift->{type} =~ /^W/ }
+sub is_type_3gc { shift->{type} eq '3GC' }
 
 sub parse {
     my $self = shift;
 
     return $self->_parse_3gc if($self->user_agent =~ /^Vodafone/);
+    return $self->_parse_softbank_3gc if($self->user_agent =~ /^SoftBank/);
     return $self->_parse_motorola_3gc if($self->user_agent =~ /^MOT-/);
 
-    $self->{type_3gc} = 0;
-    
     my($main, @rest) = split / /, $self->user_agent;
 
     if (@rest) {
-    # J-PHONE/4.0/J-SH51/SNJSHA3029293 SH/0001aa Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0
-    $self->{packet_compliant} = 1;
-    @{$self}{qw(name version model serial_number)} = split m!/!, $main;
-    if ($self->{serial_number}) {
-        $self->{serial_number} =~ s/^SN// or return $self->no_match;
+        # J-PHONE/4.0/J-SH51/SNJSHA3029293 SH/0001aa Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0
+        $self->{packet_compliant} = 1;
+        @{$self}{qw(name version model serial_number)} = split m!/!, $main;
+        if ($self->{serial_number}) {
+            $self->{serial_number} =~ s/^SN// or return $self->no_match;
+        }
+
+        my $vendor = shift @rest;
+        @{$self}{qw(vendor vendor_version)} = split m!/!, $vendor;
+
+        my %java_info = map split(m!/!), @rest;
+        $self->{java_info} = \%java_info;
+    } else {
+        # J-PHONE/2.0/J-DN02
+        @{$self}{qw(name version model)} = split m!/!, $main;
+        $self->{vendor} = ($self->{model} =~ /J-([A-Z]+)/)[0] if $self->{model};
     }
 
-    my $vendor = shift @rest;
-    @{$self}{qw(vendor vendor_version)} = split m!/!, $vendor;
+    if ($self->version =~ /^2\./) {
+        $self->{type} = 'C2';
+    } elsif ($self->version =~ /^3\./) {
+        if ($self->get_header('x-jphone-java')) {
+            $self->{type} = 'C4';
+        } else {
+            $self->{type} = 'C3';
+        }
+    } elsif ($self->version =~ /^4\./) {
+        my($jscl_ver) = ($self->{java_info}->{'Ext-Profile'} =~ /JSCL-(\d.+)/);
 
-    my %java_info = map split(m!/!), @rest;
-    $self->{java_info} = \%java_info;
+        if ($jscl_ver =~ /^1\.1\./) {
+            $self->{type} = 'P4';
+        } elsif ($jscl_ver eq '1.2.1') {
+            $self->{type} = 'P5';
+        } elsif ($jscl_ver eq '1.2.2') {
+            $self->{type} = 'P6';
+        } else {
+            $self->{type} = 'P7';
+        }
+    } elsif ($self->version =~ /^5\./) {
+        $self->{type} = 'W';
     }
-    else {
-    # J-PHONE/2.0/J-DN02
-    @{$self}{qw(name version model)} = split m!/!, $main;
-    $self->{vendor} = ($self->{model} =~ /J-([A-Z]+)/)[0] if $self->{model};
-    }
-        
 }
 
-#for 3gc
+# for 3gc
 sub _parse_3gc {
     my $self = shift;
-    
-    #Vodafone/1.0/V802SE/SEJ001 Browser/SEMC-Browser/4.1 Profile/MIDP-2.0 Configuration/CLDC-1.1
-    #Vodafone/1.0/V702NK/NKJ001 Series60/2.6 Profile/MIDP-2.0 Configuration/CLDC-1.1'
-    
+
+    # Vodafone/1.0/V802SE/SEJ001 Browser/SEMC-Browser/4.1 Profile/MIDP-2.0 Configuration/CLDC-1.1
+    # Vodafone/1.0/V702NK/NKJ001 Series60/2.6 Profile/MIDP-2.0 Configuration/CLDC-1.1
+    # SoftBank/1.0/910T/TJ001 Browser/NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1
     my($main, @rest) = split / /, $self->user_agent;
     $self->{packet_compliant} = 1;
-    $self->{type_3gc} = 1;
+    $self->{type} = '3GC';
 
     @{$self}{qw(name version model _maker serial_number)} = split m!/!, $main;
     if ($self->{serial_number}) {
         $self->{serial_number} =~ s/^SN// or return $self->no_match;
     }
-    
+
     my($java_info) = $self->user_agent =~ /(Profile.*)$/;
     my %java_info = map split(m!/!), split / /,$java_info;
     $self->{java_info} = \%java_info;
-
 }
 
-#for motorola 3gc
+# for softbank 3gc
+*_parse_softbank_3gc = \&_parse_3gc;
+
+# for motorola 3gc
 sub _parse_motorola_3gc{
     my $self = shift;
     my($main, @rest) = split / /, $self->user_agent;
 
     #MOT-V980/80.2B.04I MIB/2.2.1 Profile/MIDP-2.0 Configuration/CLDC-1.1
-    
+
     $self->{packet_compliant} = 1;
-    $self->{type_3gc} = 1;
+    $self->{type} = '3GC';
 
     @{$self}{qw(name)} = split m!/!, $main;
 
@@ -117,7 +122,6 @@ sub _parse_motorola_3gc{
     $self->{model} = 'V702MO'  if $self->{name} eq 'MOT-V980';
     $self->{model} = 'V702sMO' if $self->{name} eq 'MOT-C980';
     $self->{model} ||= $self->get_header('x-jphone-msname');
-
 }
 
 sub _make_display {
@@ -126,14 +130,14 @@ sub _make_display {
 
     my($color, $depth);
     if (my $c_str = $self->get_header('x-jphone-color')) {
-    ($color, $depth) = $c_str =~ /^([CG])(\d+)$/;
+        ($color, $depth) = $c_str =~ /^([CG])(\d+)$/;
     }
 
     return HTTP::MobileAgent::Display->new(
-    width  => $width,
-    height => $height,
-    color  => $color eq 'C',
-    depth  => $depth,
+        width  => $width,
+        height => $height,
+        color  => $color eq 'C',
+        depth  => $depth,
     );
 }
 
@@ -214,6 +218,12 @@ returns vendor code like 'SH'.
   $vendor_version = $agent->vendor_version;
 
 returns vendor version like '0001a'.  returns undef if unknown,
+
+=item type
+
+   if ($agent->type eq 'C2') { }
+
+returns the type, which is one of the following: C2 C3 C4 P4 P5 P6 P7 W 3GC
 
 =item is_type_c,is_type_p,is_type_w
 

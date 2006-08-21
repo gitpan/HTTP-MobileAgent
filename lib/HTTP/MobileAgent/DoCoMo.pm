@@ -8,7 +8,7 @@ use base qw(HTTP::MobileAgent);
 
 __PACKAGE__->make_accessors(
     qw(version model status bandwidth
-       serial_number is_foma card_id comment)
+       serial_number is_foma card_id xhtml_compliant comment)
 );
 
 use HTTP::MobileAgent::DoCoMoDisplayMap qw($DisplayMap);
@@ -23,9 +23,10 @@ $HTMLVerMap = [
     qr/[DFNP]501i/ => '1.0',
     qr/502i|821i|209i|691i|(F|N|P|KO)210i|^F671i$/ => '2.0',
     qr/(D210i|SO210i)|503i|211i|SH251i|692i|200[12]|2101V/ => '3.0',
-    qr/504i|251i|^F671iS$|^F661i$|^F672i$|212i|SO213i|2051|2102V|2701/ => '4.0',
+    qr/504i|251i|^F671iS$|^F661i$|^F672i$|212i|SO213i|2051|2102V|2701|850i/ => '4.0',
     qr/eggy|P751v/ => '3.2',
-    qr/505i|506i|252i|253i|P213i|900i|901i|700i|880i/ => '5.0',
+    qr/505i|506i|252i|253i|P213i|600i|700i|701i|800i|880i|SH851i|P851i|881i|900i|901i/ => '5.0',
+    qr/702i|D851iWM|902i/ => '6.0',
 ];
 
 $GPSModels = { map { $_ => 1 } qw(F661i F505iGPS) };
@@ -53,6 +54,7 @@ sub parse {
 	# DoCoMo/1.0/R692i/c10
 	$self->_parse_main($main);
     }
+    $self->{xhtml_compliant} = $self->version eq '2.0' ? 1 : 0;
 }
 
 sub _parse_main {
@@ -187,6 +189,9 @@ HTTP::MobileAgent::DoCoMo - NTT DoCoMo implementation
   # e.g.) "DoCoMo/1.0/eggy/c300/s32/kPHS-K"
   printf "Bandwidth: %dkbps\n", $agent->bandwidth;	# 32
 
+  # e.g.) "DoCoMo/2.0 SO902i(c100;TB;W30H16)"
+  print "XHTML compiant!\n" if $agent->xhtml_compliant;	# true
+
 =head1 DESCRIPTION
 
 HTTP::MobileAgent::DoCoMo is a subclass of HTTP::MobileAgent, which
@@ -280,6 +285,12 @@ returns status like "TB", "TC", "TD" or "TJ", which means:
   TC | Browsers with image off (only Available in HTML 5.0)
   TD | Fetching JAR
   TJ | i-Appli
+
+=item xhtml_compliant
+
+  if ($agent->xhtml_compliant) { }
+
+returns if the agent is XHTML compliant.
 
 =back
 

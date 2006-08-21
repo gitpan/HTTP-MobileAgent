@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.25';
+$VERSION = '0.26';
 
 use HTTP::MobileAgent::Request;
 
@@ -20,9 +20,10 @@ my $DoCoMoRE = '^DoCoMo/\d\.\d[ /]';
 my $JPhoneRE = '^J-PHONE/\d\.\d';
 my $VodafoneRE = '^Vodafone/\d\.\d';
 my $VodafoneMotRE = '^MOT-';
+my $SoftBankRE = '^SoftBank/\d\.\d';
 my $EZwebRE  = '^(?:KDDI-[A-Z]+\d+[A-Z]? )?UP\.Browser\/';
 my $AirHRE = '^Mozilla/3\.0\((?:WILLCOM|DDIPOCKET)\;';
-$MobileAgentRE = qr/(?:($DoCoMoRE)|($JPhoneRE)|($VodafoneRE)|($VodafoneMotRE)|($EZwebRE)|($AirHRE))/;
+$MobileAgentRE = qr/(?:($DoCoMoRE)|($JPhoneRE)|($VodafoneRE)|($VodafoneMotRE)|($SoftBankRE)|($EZwebRE)|($AirHRE))/;
 
 sub new {
     my($class, $stuff) = @_;
@@ -32,7 +33,7 @@ sub new {
     my $ua = $request->get('User-Agent');
     my $sub = 'NonMobile';
     if ($ua =~ /$MobileAgentRE/) {
-        $sub = $1 ? 'DoCoMo' : $2 ? 'JPhone' : $3 ? 'JPhone' : $4 ? 'JPhone' : $5 ? 'EZweb' :  'AirHPhone';
+        $sub = $1 ? 'DoCoMo' : ($2 || $3 || $4 || $5) ? 'JPhone' : $6 ? 'EZweb' :  'AirHPhone';
     }
 
     my $self = bless { _request => $request }, "$class\::$sub";
@@ -84,6 +85,7 @@ sub no_match {
 sub is_docomo  { 0 }
 sub is_j_phone { 0 }
 sub is_vodafone { 0 }
+sub is_softbank { 0 }
 sub is_ezweb   { 0 }
 sub is_airh_phone { 0 }
 sub is_non_mobile { 0 }
@@ -174,7 +176,7 @@ returns User-Agent string.
 
 returns User-Agent name like 'DoCoMo'.
 
-=item is_docomo, is_vodafone(is_j_phone), is_ezweb, is_wap1, is_wap2, is_tuka,is_non_mobile
+=item is_docomo, is_vodafone(is_j_phone, is_softbank), is_ezweb, is_wap1, is_wap2, is_tuka,is_non_mobile
 
    if ($agent->is_docomo) { }
 
@@ -182,11 +184,11 @@ returns if the agent is DoCoMo, Vodafone(J-Phone) or EZweb.
 
 =item carrier
 
-  print "carrier: ", $agent->carrier;    
+  print "carrier: ", $agent->carrier;
 
 =item carrier_longname
 
-  print "carrier_longname: ", $agent->carrier_longname;    
+  print "carrier_longname: ", $agent->carrier_longname;
 
 =item display
 
@@ -236,7 +238,11 @@ KUBO.  See http://pear.php.net/package-info.php?pacid=180 for details.
 
 =head1 AUTHOR
 
-Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
+Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt> is the original author and wrote almost all the code.
+
+with contributions of Satoshi Tanimoto E<lt>tanimoto@cpan.orgE<gt> and Yoshiki Kurihara E<lt>kurihara@cpan.orgE<gt>
+
+=head1 LICENSE
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

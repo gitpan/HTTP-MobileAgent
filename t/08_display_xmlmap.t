@@ -6,7 +6,7 @@ if ($@) {
     plan skip_all => 'XML::Simple not installed';
 }
 else {
-    plan tests => 49;
+    plan tests => 59;
     $ENV{DOCOMO_MAP} = 't/DoCoMoMap.xml';
     use_ok 'HTTP::MobileAgent';
 }
@@ -39,6 +39,10 @@ my @Tests = (
       { width => 240, height => 270, color => 1, depth => 262144 } ],
     [ { HTTP_USER_AGENT => "DoCoMo/2.0 P701iD(c100;TB;W24H12)" },
       { width => 240, height => 270, color => 1, depth => 65536 } ],
+    [ { HTTP_USER_AGENT => "DoCoMo/2.0 D702i(c100;TB;W23H12)" },
+      { width => 230, height => 240, color => 1, depth => 262144 } ],
+    [ { HTTP_USER_AGENT => "DoCoMo/2.0 SO902iWP+(c100;TB;W24H12)" },
+      { width => 240, height => 256, color => 1, depth => 262144 } ],
 );
 
 for (@Tests) {

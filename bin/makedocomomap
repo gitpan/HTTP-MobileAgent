@@ -6,7 +6,7 @@ use LWP::Simple;
 use Data::Dumper;
 use HTTP::MobileAgent;
 
-my $URL = 'http://www.nttdocomo.co.jp/p_s/imode/spec/ryouiki.html';
+my $URL = 'http://www.nttdocomo.co.jp/service/imode/make/content/spec/screen_area/index.html';
 
 do_task(@ARGV);
 
@@ -71,10 +71,10 @@ TEMPLATE
 
 sub regexp {
     return <<'RE';
-<TD><FONT SIZE="2">([A-Z]+\d+\w*).*?</FONT></TD>
+<TD><FONT SIZE="2">([A-Z]+\d+\w*\+?).*?</FONT></TD>
 <TD><FONT SIZE="2">.*?(?:</FONT></TD>)?
 <TD><FONT SIZE="2">.*?(?:</FONT></TD>)?
-<TD><FONT SIZE="2">(.*?)¡ß(.*?)</FONT></TD>
+<TD><FONT SIZE="2">.*?(\d+)¡ß(\d+).*?</FONT></TD>
 <TD><FONT SIZE="2">.*?</FONT></TD>
 <TD><FONT SIZE="2">(Çò¹õ|¥«¥é¡¼)(?:.*?)(\d+)(?:¿§|³¬Ä´)</FONT></TD>
 RE

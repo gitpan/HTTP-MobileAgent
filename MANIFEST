@@ -25,4 +25,5 @@ t/06_nonmobile.t
 t/07_airh.t
 t/08_display_xmlmap.t
 t/09_vodafone_3gc.t
+t/10_softbank.t
 t/DoCoMoMap.xml

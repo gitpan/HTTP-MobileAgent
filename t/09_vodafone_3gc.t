@@ -43,7 +43,7 @@ for (@Tests) {
     is $agent->vendor, $data[4],        "vendor";
     is $agent->vendor_version, $data[5],    "vendor version";
     is_deeply $agent->java_info, $data[6];
-    
+
     ok $agent->is_type_3gc && !$agent->is_type_c && !$agent->is_type_p && !$agent->is_type_w;
 }
 

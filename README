@@ -86,9 +86,14 @@ MORE IMPLEMENTATIONS
     open to the discussion or (more preferable) patches. Feel free to mail
     me.
 
+CREDITS
+    Satoshi Tanimoto <tanimoto@cpan.org>
+    Yoshiki Kurihara <kurihara@cpan.org>
+
 AUTHOR
     Tatsuhiko Miyagawa <miyagawa@bulknews.net>
 
+LICENSE
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
 

@@ -1,5 +1,24 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.26 Thu Aug 17 17:40:26 2006
+    * Added 'SoftBank' user agent support in Vodafone
+    * Added is_softbank utility method in Vodafone
+    * Added type method in Vodafone
+      (Thanks to Akinori MUSHA)
+    * Added xhtml_compliant method in DoCoMo
+      (Thanks to Atsushi Kobayashi)
+    * Fixed problem that make(xml)?docomomap programs
+      had invalid url.
+      (Thanks to Masahiro Chiba)
+    * Changed DOCOMO_MAP XML layout for DoCoMoDisplayMap
+      because there is XML invalid model in DoCoMo (SO902iWP+)
+      but old XML layout was supported too.
+    - Added D702I, D702IBCL, D851IWM, D902IS, F702ID, F881IES,
+      F902IS, L600I, N506ISII, N600I, N701IECO, N702ID, N902IS,
+      NM850IG, P506ICII, P702I, P901ITV, P902IS, SA702I, SA800I,
+      SH702ID, SH702IS, SH902IS, SH902ISL, SO702I, SO902I, SO902IWP+
+      in DoCoMoDisplayMap (auto-generated)
+
 0.25 Wed Feb  8 23:14:05 JST 2006
     * Fixed problem that make(xml)?docomomap programs couldn't parse
       current web page exactly.
