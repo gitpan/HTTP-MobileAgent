@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests =>48; 
+use Test::More tests => 61;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -19,7 +19,11 @@ my @Tests = (
       Profile => 'MIDP-2.0',
       Configuration => 'CLDC-1.1',
       }],
-
+    [ 'Nokia6820/2.0 (4.83) Profile/MIDP-1.0 Configuration/CLDC-1.0 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)',
+      undef,'Nokia6820',undef,undef,undef,undef,{
+          Profile => 'MIDP-1.0',
+          Configuration => 'CLDC-1.0',
+      }], # for funny googlebot
 );
 
 for (@Tests) {

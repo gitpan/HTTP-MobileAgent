@@ -56,11 +56,23 @@ $DisplayMap ||= {
     'depth' => '65536',
     'height' => '182'
   },
+  'D903ITV' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '320'
+  },
   'P209IS' => {
     'width' => '96',
     'color' => 1,
     'depth' => '256',
     'height' => '87'
+  },
+  'SO903ITV' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '368'
   },
   'P504I' => {
     'width' => '132',
@@ -73,6 +85,18 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '4096',
     'height' => '113'
+  },
+  'F704I' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
+  },
+  'SO703I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '368'
   },
   'N251IS' => {
     'width' => '132',
@@ -176,6 +200,12 @@ $DisplayMap ||= {
     'depth' => '65536',
     'height' => '130'
   },
+  'L602I' => {
+    'width' => '170',
+    'color' => 1,
+    'depth' => '65536',
+    'height' => '189'
+  },
   'P209I' => {
     'width' => '96',
     'color' => '',
@@ -193,6 +223,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '262144',
     'height' => '198'
+  },
+  'D800IDS' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
   },
   'SO210I' => {
     'width' => '120',
@@ -219,6 +255,18 @@ $DisplayMap ||= {
     'height' => '144'
   },
   'F901IC' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
+  },
+  'D703I' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
+  },
+  'D702IF' => {
     'width' => '230',
     'color' => 1,
     'depth' => '262144',
@@ -278,6 +326,12 @@ $DisplayMap ||= {
     'depth' => '262144',
     'height' => '144'
   },
+  'F883IES' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '65536',
+    'height' => '256'
+  },
   'SH506IC' => {
     'width' => '240',
     'color' => 1,
@@ -295,6 +349,24 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '262144',
     'height' => '240'
+  },
+  'SH904I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '320'
+  },
+  'P702ID' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
+  },
+  'P703I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
   },
   'SA700IS' => {
     'width' => '240',
@@ -325,6 +397,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '65536',
     'height' => '144'
+  },
+  'L601I' => {
+    'width' => '170',
+    'color' => 1,
+    'depth' => '65536',
+    'height' => '189'
   },
   'SO502IWM' => {
     'width' => '120',
@@ -379,6 +457,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '262144',
     'height' => '320'
+  },
+  'M702IS' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '267'
   },
   'D701IWM' => {
     'width' => '230',
@@ -494,6 +578,12 @@ $DisplayMap ||= {
     'depth' => '262144',
     'height' => '144'
   },
+  'F903IBSC' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
+  },
   'SO506IC' => {
     'width' => '240',
     'color' => 1,
@@ -505,6 +595,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '65536',
     'height' => '140'
+  },
+  'N904I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '352'
   },
   'N600I' => {
     'width' => '176',
@@ -523,6 +619,18 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '262144',
     'height' => '270'
+  },
+  'D903I' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '320'
+  },
+  'F703I' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
   },
   'F900I' => {
     'width' => '230',
@@ -566,6 +674,12 @@ $DisplayMap ||= {
     'depth' => '2',
     'height' => '72'
   },
+  'P704I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
+  },
   'SO902I' => {
     'width' => '240',
     'color' => 1,
@@ -590,6 +704,18 @@ $DisplayMap ||= {
     'depth' => '65536',
     'height' => '269'
   },
+  'SH704I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '320'
+  },
+  'N702IS' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '65536',
+    'height' => '270'
+  },
   'P700I' => {
     'width' => '240',
     'color' => 1,
@@ -601,6 +727,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '65536',
     'height' => '270'
+  },
+  'F904I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '352'
   },
   'SO212I' => {
     'width' => '120',
@@ -638,14 +770,20 @@ $DisplayMap ||= {
     'depth' => '262144',
     'height' => '295'
   },
+  'F883I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '65536',
+    'height' => '256'
+  },
   'F902IS' => {
     'width' => '230',
     'color' => 1,
     'depth' => '262144',
-    'height' => '320'
+    'height' => '240'
   },
   'L600I' => {
-    'width' => '176',
+    'width' => '170',
     'color' => 1,
     'depth' => '65536',
     'height' => '189'
@@ -710,17 +848,35 @@ $DisplayMap ||= {
     'depth' => '65536',
     'height' => '240'
   },
+  'D704I' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
+  },
   'N210I' => {
     'width' => '118',
     'color' => 1,
     'depth' => '256',
     'height' => '113'
   },
+  'P903I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
+  },
   'N502IT' => {
     'width' => '118',
     'color' => 1,
     'depth' => '256',
     'height' => '128'
+  },
+  'N703ID' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
   },
   'P900I' => {
     'width' => '240',
@@ -733,6 +889,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '65536',
     'height' => '256'
+  },
+  'M702IG' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '267'
   },
   'R691I' => {
     'width' => '96',
@@ -751,6 +913,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '262144',
     'height' => '240'
+  },
+  'N601I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '65536',
+    'height' => '270'
   },
   'D702I' => {
     'width' => '230',
@@ -788,11 +956,29 @@ $DisplayMap ||= {
     'depth' => '262144',
     'height' => '270'
   },
+  'SO903I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '368'
+  },
   'N506I' => {
     'width' => '240',
     'color' => 1,
     'depth' => '262144',
     'height' => '295'
+  },
+  'P904I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '350'
+  },
+  'SH703I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
   },
   'SA702I' => {
     'width' => '240',
@@ -817,6 +1003,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '4096',
     'height' => '98'
+  },
+  'F903I' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
   },
   'SO502I' => {
     'width' => '120',
@@ -854,6 +1046,12 @@ $DisplayMap ||= {
     'depth' => '256',
     'height' => '126'
   },
+  'N902IL' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
+  },
   'N901IC' => {
     'width' => '240',
     'color' => 1,
@@ -878,6 +1076,12 @@ $DisplayMap ||= {
     'depth' => '65536',
     'height' => '113'
   },
+  'N704I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
+  },
   'N702ID' => {
     'width' => '240',
     'color' => 1,
@@ -901,6 +1105,12 @@ $DisplayMap ||= {
     'color' => '',
     'depth' => '2',
     'height' => '84'
+  },
+  'P903IX' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
   },
   'P901ITV' => {
     'width' => '240',
@@ -986,6 +1196,18 @@ $DisplayMap ||= {
     'depth' => '262144',
     'height' => '256'
   },
+  'N703I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
+  },
+  'N903I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
+  },
   'D902IS' => {
     'width' => '230',
     'color' => 1,
@@ -1046,17 +1268,35 @@ $DisplayMap ||= {
     'depth' => '262144',
     'height' => '256'
   },
+  'D904I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '320'
+  },
   'F503I' => {
     'width' => '120',
     'color' => 1,
     'depth' => '256',
     'height' => '130'
   },
+  'P903ITV' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '350'
+  },
   'SH902ISL' => {
     'width' => '240',
     'color' => 1,
     'depth' => '262144',
     'height' => '240'
+  },
+  'SO704I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '368'
   },
   'P901IS' => {
     'width' => '240',
@@ -1112,11 +1352,23 @@ $DisplayMap ||= {
     'depth' => '65536',
     'height' => '136'
   },
+  'SH903I' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '320'
+  },
   'N902IS' => {
     'width' => '240',
     'color' => 1,
     'depth' => '262144',
     'height' => '270'
+  },
+  'SH903ITV' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '320'
   },
   'P506IC' => {
     'width' => '240',
@@ -1136,6 +1388,18 @@ $DisplayMap ||= {
     'depth' => '262144',
     'height' => '268'
   },
+  'F903IX' => {
+    'width' => '230',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '240'
+  },
+  'N902IX' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '270'
+  },
   'N821I' => {
     'width' => '118',
     'color' => '',
@@ -1147,6 +1411,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '65536',
     'height' => '198'
+  },
+  'F882IES' => {
+    'width' => '240',
+    'color' => 1,
+    'depth' => '65536',
+    'height' => '256'
   },
   'N504I' => {
     'width' => '160',

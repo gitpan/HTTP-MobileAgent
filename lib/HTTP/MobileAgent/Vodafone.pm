@@ -32,8 +32,9 @@ sub parse {
     return $self->_parse_3gc if($self->user_agent =~ /^Vodafone/);
     return $self->_parse_softbank_3gc if($self->user_agent =~ /^SoftBank/);
     return $self->_parse_motorola_3gc if($self->user_agent =~ /^MOT-/);
+    return $self->_parse_crawler if($self->user_agent =~ /^Nokia/); # ad hoc
 
-    my($main, @rest) = split / /, $self->user_agent;
+    my($main, @rest) = split / /, _subtract_ua($self->user_agent);
 
     if (@rest) {
         # J-PHONE/4.0/J-SH51/SNJSHA3029293 SH/0001aa Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0
@@ -51,6 +52,7 @@ sub parse {
     } else {
         # J-PHONE/2.0/J-DN02
         @{$self}{qw(name version model)} = split m!/!, $main;
+        $self->{name} = 'J-PHONE' if $self->{name} eq 'J-Phone'; # for J-Phone/5.0/J-SH03 (YahooSeeker)
         $self->{vendor} = ($self->{model} =~ /J-([A-Z]+)/)[0] if $self->{model};
     }
 
@@ -124,6 +126,21 @@ sub _parse_motorola_3gc{
     $self->{model} ||= $self->get_header('x-jphone-msname');
 }
 
+# for crawler
+sub _parse_crawler {
+    my $self = shift;
+    my($main, @rest) = split / /, _subtract_ua($self->user_agent);
+
+    # Nokia6820/2.0 (4.83) Profile/MIDP-1.0 Configuration/CLDC-1.0
+    @{$self}{qw(model)} = split m!/!, $main;
+    $self->{name} = 'Vodafone';
+    $self->{type} = '3GC';
+
+    shift @rest;
+    my %java_info = map split(m!/!), @rest;
+    $self->{java_info} = \%java_info;
+}
+
 sub _make_display {
     my $self = shift;
     my($width, $height) = split /\*/, $self->get_header('x-jphone-display');
@@ -139,6 +156,12 @@ sub _make_display {
         color  => $color eq 'C',
         depth  => $depth,
     );
+}
+
+sub _subtract_ua {
+    my $user_agent = shift;
+    $user_agent =~ s/\s*\(compatible\s*[^\)]+\)//i;
+    return $user_agent;
 }
 
 1;
@@ -225,7 +248,7 @@ returns vendor version like '0001a'.  returns undef if unknown,
 
 returns the type, which is one of the following: C2 C3 C4 P4 P5 P6 P7 W 3GC
 
-=item is_type_c,is_type_p,is_type_w
+=item is_type_c,is_type_p,is_type_w,is_type_3gc
 
    if ($agent->is_type_c) { }
 

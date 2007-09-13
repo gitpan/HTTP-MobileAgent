@@ -53,7 +53,18 @@ BEGIN {
         eval q{
             require XML::Simple;
             my $xml = XML::Simple->new;
-            $DisplayMap = $xml->XMLin($ENV{DOCOMO_MAP});
+            my $map = $xml->XMLin($ENV{DOCOMO_MAP});
+            if ($map->{terminal}) {
+                # new layout
+                for my $terminal (@{$map->{terminal}}) {
+                    my $model = delete $terminal->{model};
+                    $DisplayMap->{$model} = $terminal;
+                }
+            }
+            else {
+                # old layout
+                $DisplayMap = $map;
+            }
         };
         warn "using normal hash map: $@" if $@;
     }

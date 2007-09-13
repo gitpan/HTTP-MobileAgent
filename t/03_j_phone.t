@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 246;
+use Test::More tests => 256;
 
 BEGIN { use_ok 'HTTP::MobileAgent' }
 
@@ -20,6 +20,7 @@ my @Tests = (
 	  'Ext-Profile' => 'JSCL-1.1.0',
       }],
     [ 'J-PHONE/5.0/V801SA', '5.0', 'V801SA', undef ],
+    [ 'J-Phone/5.0/J-SH03 (compatible; Mozilla 4.0; MSIE 5.5; YahooSeeker)', '5.0', 'J-SH03', undef ],
 );
 
 for (@Tests) {

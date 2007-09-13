@@ -1,5 +1,24 @@
 Revision history for Perl extension HTTP::MobileAgent
 
+0.26_01 Thu Aug  9 17:08:05 2007
+    * Supported funny mobile search crawler.
+      eg. J-Phone/5.0/J-SH03
+          Nokia6820/2.0 (4.83) Profile/MIDP-1.0 Configuration/CLDC-1.0
+      (Thanks to Akira Kamikura and Tokuhiro MATSUNO)
+    - Added L600I L601I M702IS M702IG L602I F902IS SO902IWP+
+      N902IX N902IL N702IS P702ID D702IF F882IES N601I D800IDS
+      P703I F883I P704I SH903I P903I N903I D903I F903I SO903I
+      D903ITV F903IX P903ITV SH903ITV F903IBSC P903IX SO903ITV
+      N703ID F703I P703I D703I SH703I N703I SO703I SH904I N904I
+      F904I D904I P904I SO704I F704I N704I SH704I D704I F883IES
+      in DoCoMoMap.xml (auto-generated)
+    - Added D903ITV SO903ITV F704I SO703I L602I D800IDS D703I D702IF
+      SH904I P702ID P703I L601I M702IS F903IBSC N904I D903I F703I
+      P704I SH704I N702IS F904I F883I P903I N703ID M702IG N601I SO903I
+      P904I SH703I F903I N902IL N704I P903IX N703I N903I D904I
+      P903ITV SO704I SH903I SH903ITV F903IX N902IX F882IES D704I F883IES
+      in DoCoMoDisplayMap (auto-generated)
+
 0.26 Thu Aug 17 17:40:26 2006
     * Added 'SoftBank' user agent support in Vodafone
     * Added is_softbank utility method in Vodafone
@@ -22,7 +41,7 @@ Revision history for Perl extension HTTP::MobileAgent
 0.25 Wed Feb  8 23:14:05 JST 2006
     * Fixed problem that make(xml)?docomomap programs couldn't parse
       current web page exactly.
-      (Thanks to MATSUNO Tokuhiro)
+      (Thanks to Tokuhiro MATSUNO)
     - Added D701i, D701iWM, D901iS, D902i, F700iS, F901iS, F902i,
       N701i, N901iS, N902i, P701iD, P851i, P901iS, P902i, SA700iS,
       SH700iS, SH851i, SH901iS, SH902i, SO213iWR, SO506iS

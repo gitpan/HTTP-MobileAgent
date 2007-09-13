@@ -163,8 +163,12 @@
   <terminal color="1" depth="65536" height="240" model="D701IWM" width="230" />
   <terminal color="1" depth="65536" height="270" model="N701IECO" width="240" />
   <terminal color="1" depth="65536" height="252" model="SA800I" width="240" />
-  <terminal color="1" depth="65536" height="189" model="L600I" width="176" />
+  <terminal color="1" depth="65536" height="189" model="L600I" width="170" />
   <terminal color="1" depth="65536" height="180" model="N600I" width="176" />
+  <terminal color="1" depth="65536" height="189" model="L601I" width="170" />
+  <terminal color="1" depth="262144" height="267" model="M702IS" width="240" />
+  <terminal color="1" depth="262144" height="267" model="M702IG" width="240" />
+  <terminal color="1" depth="65536" height="189" model="L602I" width="170" />
   <terminal color="1" depth="262144" height="240" model="F902I" width="230" />
   <terminal color="1" depth="262144" height="320" model="D902I" width="230" />
   <terminal color="1" depth="262144" height="270" model="N902I" width="240" />
@@ -175,9 +179,11 @@
   <terminal color="1" depth="262144" height="270" model="P902IS" width="240" />
   <terminal color="1" depth="262144" height="270" model="N902IS" width="240" />
   <terminal color="1" depth="262144" height="320" model="D902IS" width="230" />
-  <terminal color="1" depth="262144" height="320" model="F902IS" width="230" />
+  <terminal color="1" depth="262144" height="240" model="F902IS" width="230" />
   <terminal color="1" depth="262144" height="256" model="SO902IWP+" width="240" />
   <terminal color="1" depth="262144" height="240" model="SH902ISL" width="240" />
+  <terminal color="1" depth="262144" height="270" model="N902IX" width="240" />
+  <terminal color="1" depth="262144" height="270" model="N902IL" width="240" />
   <terminal color="1" depth="262144" height="270" model="P702I" width="240" />
   <terminal color="1" depth="65536" height="270" model="N702ID" width="240" />
   <terminal color="1" depth="262144" height="240" model="F702ID" width="230" />
@@ -187,6 +193,47 @@
   <terminal color="1" depth="262144" height="240" model="D702IBCL" width="230" />
   <terminal color="1" depth="65536" height="252" model="SA702I" width="240" />
   <terminal color="1" depth="262144" height="240" model="SH702IS" width="240" />
+  <terminal color="1" depth="65536" height="270" model="N702IS" width="240" />
+  <terminal color="1" depth="262144" height="270" model="P702ID" width="240" />
+  <terminal color="1" depth="262144" height="240" model="D702IF" width="230" />
   <terminal color="1" depth="262144" height="320" model="D851IWM" width="230" />
+  <terminal color="1" depth="65536" height="256" model="F882IES" width="240" />
+  <terminal color="1" depth="65536" height="270" model="N601I" width="240" />
+  <terminal color="1" depth="262144" height="240" model="D800IDS" width="230" />
+  <terminal color="1" depth="262144" height="270" model="P703I" width="240" />
+  <terminal color="1" depth="65536" height="256" model="F883I" width="240" />
+  <terminal color="1" depth="262144" height="270" model="P704I" width="240" />
+  <terminal color="1" depth="262144" height="320" model="SH903I" width="240" />
+  <terminal color="1" depth="262144" height="270" model="P903I" width="240" />
+  <terminal color="1" depth="262144" height="270" model="N903I" width="240" />
+  <terminal color="1" depth="262144" height="320" model="D903I" width="230" />
+  <terminal color="1" depth="262144" height="240" model="F903I" width="230" />
+  <terminal color="1" depth="262144" height="368" model="SO903I" width="240" />
+  <terminal color="1" depth="262144" height="320" model="D903ITV" width="230" />
+  <terminal color="1" depth="262144" height="240" model="F903IX" width="230" />
+  <terminal color="1" depth="262144" height="350" model="P903ITV" width="240" />
+  <terminal color="1" depth="262144" height="320" model="SH903ITV" width="240" />
+  <terminal color="1" depth="262144" height="240" model="F903IBSC" width="230" />
+  <terminal color="1" depth="262144" height="270" model="P903IX" width="240" />
+  <terminal color="1" depth="262144" height="368" model="SO903ITV" width="240" />
+  <terminal color="1" depth="262144" height="270" model="N703ID" width="240" />
+  <terminal color="1" depth="262144" height="240" model="F703I" width="230" />
+  <terminal color="1" depth="262144" height="270" model="P703I" width="240" />
+  <terminal color="1" depth="262144" height="240" model="D703I" width="230" />
+  <terminal color="1" depth="262144" height="240" model="SH703I" width="240" />
+  <terminal color="1" depth="262144" height="270" model="N703I" width="240" />
+  <terminal color="1" depth="262144" height="368" model="SO703I" width="240" />
+  <terminal color="1" depth="262144" height="320" model="SH904I" width="240" />
+  <terminal color="1" depth="262144" height="352" model="N904I" width="240" />
+  <terminal color="1" depth="262144" height="352" model="F904I" width="240" />
+  <terminal color="1" depth="262144" height="320" model="D904I" width="240" />
+  <terminal color="1" depth="262144" height="350" model="P904I" width="240" />
+  <terminal color="1" depth="262144" height="368" model="SO704I" width="240" />
+  <terminal color="1" depth="262144" height="240" model="F704I" width="230" />
+  <terminal color="1" depth="262144" height="270" model="N704I" width="240" />
+  <terminal color="1" depth="262144" height="320" model="SH704I" width="240" />
+  <terminal color="1" depth="262144" height="240" model="D704I" width="230" />
+  <terminal color="1" depth="262144" height="270" model="P704I" width="240" />
+  <terminal color="1" depth="65536" height="256" model="F883IES" width="240" />
 </opt>
 

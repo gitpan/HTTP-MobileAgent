@@ -2,7 +2,7 @@ package HTTP::MobileAgent;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.26';
+$VERSION = '0.26_1';
 
 use HTTP::MobileAgent::Request;
 
@@ -17,13 +17,14 @@ use vars qw($MobileAgentRE);
 # this matching should be robust enough
 # detailed analysis is done in subclass's parse()
 my $DoCoMoRE = '^DoCoMo/\d\.\d[ /]';
-my $JPhoneRE = '^J-PHONE/\d\.\d';
+my $JPhoneRE = '^(?i:J-PHONE/\d\.\d)';
 my $VodafoneRE = '^Vodafone/\d\.\d';
 my $VodafoneMotRE = '^MOT-';
 my $SoftBankRE = '^SoftBank/\d\.\d';
+my $SoftBankCrawlerRE = '^Nokia[^/]+/\d\.\d';
 my $EZwebRE  = '^(?:KDDI-[A-Z]+\d+[A-Z]? )?UP\.Browser\/';
 my $AirHRE = '^Mozilla/3\.0\((?:WILLCOM|DDIPOCKET)\;';
-$MobileAgentRE = qr/(?:($DoCoMoRE)|($JPhoneRE)|($VodafoneRE)|($VodafoneMotRE)|($SoftBankRE)|($EZwebRE)|($AirHRE))/;
+$MobileAgentRE = qr/(?:($DoCoMoRE)|($JPhoneRE|$VodafoneRE|$VodafoneMotRE|$SoftBankRE|$SoftBankCrawlerRE)|($EZwebRE)|($AirHRE))/;
 
 sub new {
     my($class, $stuff) = @_;
@@ -33,7 +34,7 @@ sub new {
     my $ua = $request->get('User-Agent');
     my $sub = 'NonMobile';
     if ($ua =~ /$MobileAgentRE/) {
-        $sub = $1 ? 'DoCoMo' : ($2 || $3 || $4 || $5) ? 'JPhone' : $6 ? 'EZweb' :  'AirHPhone';
+        $sub = $1 ? 'DoCoMo' : $2 ? 'JPhone' : $3 ? 'EZweb' :  'AirHPhone';
     }
 
     my $self = bless { _request => $request }, "$class\::$sub";
