@@ -164,6 +164,16 @@ sub _subtract_ua {
     return $user_agent;
 }
 
+sub xhtml_compliant {
+    my $self = shift;
+    return ($self->is_type_w || $self->is_type_3gc) ? 1 : 0;
+}
+
+sub user_id {
+    my $self = shift;
+    return $self->get_header( 'x-jphone-uid' ) unless $self->is_type_c;
+}
+
 1;
 __END__
 
@@ -265,6 +275,12 @@ returns hash reference of Java profiles. Hash structure is something like:
   'Ext-Profile'   => 'JSCL-1.1.0',
 
 returns undef if unknown.
+
+=item xhtml_compliant
+
+  if ($agent->xhtml_compliant) { }
+
+returns if the agent is XHTML compliant.
 
 =back
 

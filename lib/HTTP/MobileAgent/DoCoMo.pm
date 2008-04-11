@@ -17,7 +17,7 @@ use HTTP::MobileAgent::DoCoMoDisplayMap qw($DisplayMap);
 use vars qw($DefaultCacheSize $HTMLVerMap $GPSModels);
 $DefaultCacheSize = 5;
 
-# http://www.nttdocomo.co.jp/p_s/imode/spec/useragent.html
+# http://www.nttdocomo.co.jp/service/imode/make/content/spec/useragent/
 $HTMLVerMap = [
     # regex => version
     qr/[DFNP]501i/ => '1.0',
@@ -54,7 +54,11 @@ sub parse {
 	# DoCoMo/1.0/R692i/c10
 	$self->_parse_main($main);
     }
-    $self->{xhtml_compliant} = $self->version eq '2.0' ? 1 : 0;
+
+    $self->{xhtml_compliant} =
+      ( $self->is_foma && !( $self->html_version && $self->html_version == 3.0 ) )
+      ? 1
+      : 0;
 }
 
 sub _parse_main {
@@ -146,6 +150,11 @@ sub _make_display {
 sub is_gps {
     my $self = shift;
     return exists $GPSModels->{$self->model};
+}
+
+sub user_id {
+    my $self = shift;
+    return $self->get_header( 'x-dcmguid' );
 }
 
 1;
