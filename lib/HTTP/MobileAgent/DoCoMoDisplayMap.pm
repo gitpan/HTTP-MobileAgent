@@ -272,6 +272,12 @@ $DisplayMap ||= {
     'height' => '648',
     'width' => '480'
   },
+  'F01C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '656',
+    'width' => '480'
+  },
   'F02A' => {
     'color' => 1,
     'depth' => '262144',
@@ -282,6 +288,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '262144',
     'height' => '648',
+    'width' => '480'
+  },
+  'F02C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '656',
     'width' => '480'
   },
   'F03A' => {
@@ -296,6 +308,12 @@ $DisplayMap ||= {
     'height' => '648',
     'width' => '480'
   },
+  'F03C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '656',
+    'width' => '480'
+  },
   'F04A' => {
     'color' => 1,
     'depth' => '262144',
@@ -305,6 +323,12 @@ $DisplayMap ||= {
   'F04B' => {
     'color' => 1,
     'depth' => '16777216',
+    'height' => '648',
+    'width' => '480'
+  },
+  'F04C' => {
+    'color' => 1,
+    'depth' => '262144',
     'height' => '648',
     'width' => '480'
   },
@@ -704,6 +728,18 @@ $DisplayMap ||= {
     'height' => '660',
     'width' => '480'
   },
+  'L01C' => {
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '330',
+    'width' => '240'
+  },
+  'L03C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '320',
+    'width' => '240'
+  },
   'L600I' => {
     'color' => 1,
     'depth' => '65536',
@@ -776,6 +812,12 @@ $DisplayMap ||= {
     'height' => '640',
     'width' => '480'
   },
+  'N01C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '650',
+    'width' => '480'
+  },
   'N02A' => {
     'color' => 1,
     'depth' => '262144',
@@ -788,6 +830,12 @@ $DisplayMap ||= {
     'height' => '640',
     'width' => '480'
   },
+  'N02C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '650',
+    'width' => '480'
+  },
   'N03A' => {
     'color' => 1,
     'depth' => '262144',
@@ -798,6 +846,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '262144',
     'height' => '640',
+    'width' => '480'
+  },
+  'N03C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '650',
     'width' => '480'
   },
   'N04A' => {
@@ -1256,6 +1310,12 @@ $DisplayMap ||= {
     'height' => '662',
     'width' => '480'
   },
+  'P01C' => {
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '331',
+    'width' => '240'
+  },
   'P02A' => {
     'color' => 1,
     'depth' => '262144',
@@ -1263,6 +1323,12 @@ $DisplayMap ||= {
     'width' => '240'
   },
   'P02B' => {
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '662',
+    'width' => '480'
+  },
+  'P02C' => {
     'color' => 1,
     'depth' => '262144',
     'height' => '662',
@@ -1279,6 +1345,12 @@ $DisplayMap ||= {
     'depth' => '262144',
     'height' => '331',
     'width' => '240'
+  },
+  'P03C' => {
+    'color' => 1,
+    'depth' => '262144',
+    'height' => '650',
+    'width' => '480'
   },
   'P04A' => {
     'color' => 1,
@@ -1724,6 +1796,12 @@ $DisplayMap ||= {
     'height' => '646',
     'width' => '480'
   },
+  'SH01C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '656',
+    'width' => '480'
+  },
   'SH02A' => {
     'color' => 1,
     'depth' => '16777216',
@@ -1734,6 +1812,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '16777216',
     'height' => '646',
+    'width' => '480'
+  },
+  'SH02C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '656',
     'width' => '480'
   },
   'SH03A' => {
@@ -1760,6 +1844,12 @@ $DisplayMap ||= {
     'height' => '592',
     'width' => '480'
   },
+  'SH04C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '656',
+    'width' => '480'
+  },
   'SH05A' => {
     'color' => 1,
     'depth' => '16777216',
@@ -1770,6 +1860,12 @@ $DisplayMap ||= {
     'color' => 1,
     'depth' => '16777216',
     'height' => '646',
+    'width' => '480'
+  },
+  'SH05C' => {
+    'color' => 1,
+    'depth' => '16777216',
+    'height' => '592',
     'width' => '480'
   },
   'SH06A' => {
