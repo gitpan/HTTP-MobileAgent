@@ -24,6 +24,7 @@ requires:
   HTTP::Headers: 1.43
   Scalar::Util: 1.14
   WWW::MobileCarrierJP: 0.04
+  YAML: 0.71
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.30
+version: 0.31
